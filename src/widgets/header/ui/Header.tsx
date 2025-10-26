@@ -2,22 +2,19 @@
 
 import React, { useState } from 'react';
 
-import { cn } from '@shared/lib';
-import {
-	Button,
-	CloseIcon,
-	LogoIcon,
-} from '@shared/ui';
 import Link from 'next/link';
 
+import { cn } from '@shared/lib';
+import { Button, CloseIcon, LogoIcon } from '@shared/ui';
+
 interface Props {
-  className?: string;
+	className?: string;
 }
 
 export const Header: React.FC<Props> = ({ className }) => {
 	const [isMenuDrawerOpen, setIsMenuDrawerOpen] = useState(true);
-	
-  return (
+
+	return (
 		<header className={cn('bg-[#000c26] py-4', className)}>
 			{/* Menu burger */}
 			<div
@@ -28,12 +25,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 			</div>
 
 			{/* Menu Drawer */}
-			<div
-				className={cn(
-					'bg-white',
-					isMenuDrawerOpen ? 'block' : 'hidden',
-				)}
-			>
+			<div className={cn('bg-white', isMenuDrawerOpen ? 'block' : 'hidden')}>
 				{/* Menu Drawer Header */}
 				<div className='bg-[#000c26] text-white flex items-center pr-4'>
 					<Link href='/'>
@@ -42,27 +34,21 @@ export const Header: React.FC<Props> = ({ className }) => {
 						<p className='ml-3 uppercase font-bold text-xl'>Вилки палки</p>
 					</Link>
 
-					<div
-						onClick={() => setIsMenuDrawerOpen(false)}
-						className='ml-auto'
-					>
+					<div onClick={() => setIsMenuDrawerOpen(false)} className='ml-auto'>
 						<CloseIcon />
 					</div>
 				</div>
 
 				{/* Menu Drawer Body */}
 				<div>
-					<h2>
-						Авторизація
-					</h2>
+					<h2>Авторизація</h2>
 
 					<p>
-						Зареєструйся і отримуй кешбек на бонусний рахунок. За допомогою бонусів можна частково або повністю розрахуватися за замовлення.
+						Зареєструйся і отримуй кешбек на бонусний рахунок. За допомогою
+						бонусів можна частково або повністю розрахуватися за замовлення.
 					</p>
 
-					<Button variant='default'>
-						Вхід
-					</Button>
+					<Button variant='default'>Вхід</Button>
 
 					<nav>
 						<ul>
@@ -77,9 +63,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 							</li>
 						</ul>
 					</nav>
-
 				</div>
-
 			</div>
 
 			{/* Menu drawer */}

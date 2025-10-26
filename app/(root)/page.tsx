@@ -1,7 +1,3 @@
 export default async function Home() {
-	return (
-		<>
-			Розмітка дефолтної сторінки
-		</>
-	);
+	return <>Розмітка дефолтної сторінки</>;
 }
