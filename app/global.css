@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-custom-blue: #0f399a;
+  --color-custom-pink: #ffbdc8;
+  --color-custom-pink-light: rgba(255, 189, 200, 0.9);
+  --color-custom-pink-dark: #ffa6b5;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
