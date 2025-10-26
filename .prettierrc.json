@@ -2,9 +2,9 @@
 	"trailingComma": "all",
 	"tabWidth": 2,
 	"useTabs": true,
-	"singleQuote": false,
-	"jsxSingleQuote": false,
-	"semi": false,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"semi": true,
 
 	"plugins": ["@ianvs/prettier-plugin-sort-imports"],
 
