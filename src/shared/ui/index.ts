@@ -7,3 +7,4 @@ export { CloseIcon } from './icons/Close';
 export { Button } from './components/button/Button';
 export { Title } from './components/title/Title';
 export { MenuDrawer } from './components/menu-drawer/MenuDrawer';
+export { CategoryDrawer } from './components/category-drawer/CategoryDrawer';
