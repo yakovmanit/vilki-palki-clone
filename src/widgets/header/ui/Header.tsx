@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 import { cn } from '@shared/lib';
-import { CategoryDrawer, MenuDrawer } from '@shared/ui';
+import { CategoryDrawer, LocaleSwitcher, MenuDrawer } from '@shared/ui';
 
 interface Props {
 	className?: string;
@@ -15,10 +15,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 
 	return (
 		<header
-			className={cn(
-				'bg-primary pr-4 flex items-center justify-between',
-				className,
-			)}
+			className={cn('bg-primary flex items-center justify-between', className)}
 		>
 			<MenuDrawer
 				isMenuDrawerOpen={isMenuDrawerOpen}
@@ -30,10 +27,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 				setIsCatsDrawerOpen={setIsCatsDrawerOpen}
 			/>
 
-			{/* Lang switcher */}
-			<div className='text-custom-gray'>
-				<span>UA</span>
-			</div>
+			<LocaleSwitcher />
 		</header>
 	);
 };
