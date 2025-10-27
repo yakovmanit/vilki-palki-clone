@@ -8,14 +8,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "concurrently \"next dev\" \"yarn i18n:listen\"",
 		"build": "next build",
 		"start": "next start",
 		"lint": "concurrently \"yarn lint:es\" \"yarn lint:prettier\"",
 		"lint:es": "next lint",
 		"lint:prettier": "prettier . --write",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"i18n:pull": "i18nexus pull -p ./src/shared/constants/messages",
+		"i18n:listen": "i18nexus listen -p ./src/shared/constants/messages"
 	},
 	"dependencies": {
 		"@radix-ui/react-slot": "^1.2.3",
@@ -23,7 +25,9 @@
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"cva": "^0.0.0",
+		"i18nexus-cli": "^3.8.2",
 		"next": "15.4.7",
+		"next-intl": "^4.4.0",
 		"normalize.css": "^8.0.1",
 		"postcss": "^8.5.6",
 		"postcss-cva": "^0.2.5",
