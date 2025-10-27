@@ -5,7 +5,7 @@ import { cn } from '@shared/lib';
 
 import { useLocale } from 'use-intl';
 import { usePathname, useRouter } from '@shared/lib/i18n';
-import { useGetLocalesWithoutCurrent } from './hooks/useGetLocalesWithoutCurrent';
+import { useLocalesWithoutCurrent } from './hooks/useLocalesWithoutCurrent';
 
 interface Props {
   className?: string;
@@ -17,7 +17,7 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 
 	const currentLocale = useLocale();
 
-	const localesWithoutCurrent = useGetLocalesWithoutCurrent();
+	const localesWithoutCurrent = useLocalesWithoutCurrent();
 
 	const router = useRouter();
 	const pathname = usePathname();
@@ -66,8 +66,8 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 				{localesWithoutCurrent.map((loc) => (
 					<button
 						key={loc}
-						className=' top-full left-0 w-full h-[54px] cursor-pointer font-bold uppercase'
-						onClick={() => switchLocale(loc.toLowerCase())}
+						className='top-full left-0 w-full h-[54px] cursor-pointer font-bold uppercase'
+						onClick={() => switchLocale(loc)}
 					>
 						{loc}
 					</button>
