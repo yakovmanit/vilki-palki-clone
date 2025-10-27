@@ -2,10 +2,8 @@
 
 import React, { useState } from 'react';
 
-import Link from 'next/link';
-
 import { cn } from '@shared/lib';
-import { Button, CloseIcon, LogoIcon, MenuDrawer, Title } from '@shared/ui';
+import { LogoIcon, MenuDrawer } from '@shared/ui';
 
 interface Props {
 	className?: string;
