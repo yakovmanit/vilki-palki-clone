@@ -2,7 +2,7 @@ import '../global.css';
 
 import { Header } from '@widgets/header';
 import { hasLocale } from 'use-intl';
-import { routing } from '@shared/lib';
+import { routing } from '@shared/lib/i18n';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 
