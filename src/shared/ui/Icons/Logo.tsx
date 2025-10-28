@@ -1,9 +1,7 @@
 export const LogoIcon = ({
 	className,
-	fill = '#fff',
 }: {
 	className?: string;
-	fill?: string
 }) => {
 	return (
 		<svg

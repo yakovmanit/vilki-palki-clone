@@ -1,11 +1,6 @@
 import React from 'react';
-
-import Link from 'next/link';
-
 import { cn } from '@shared/lib';
-import { MenuArrowIcon } from '@shared/ui';
-
-import { CategoryIcon } from '../../../../../public/assets/CategoryIcon';
+import { CategoryList, MenuArrowIcon } from '@shared/ui';
 
 type Props = {
 	isCatsDrawerOpen: boolean;
@@ -45,64 +40,7 @@ export const CategoryDrawer: React.FC<Props> = ({
 			>
 				{/* Cats Drawer Body */}
 				<div className='pt-5 border-y border-gray-500'>
-					<ul className='grid grid-cols-3 gap-2'>
-						<li>
-							<Link href='/category/1'>
-								<div className='flex flex-col items-center'>
-									<div>
-										<CategoryIcon />
-									</div>
-									<p className='p-4 block text-white text-center'>
-										Заморожені страви
-									</p>
-								</div>
-							</Link>
-						</li>
-						<li>
-							<Link href='/category/1'>
-								<div className='flex flex-col items-center'>
-									<div>
-										<CategoryIcon />
-									</div>
-									<p className='p-4 block text-white text-center'>Ланчі</p>
-								</div>
-							</Link>
-						</li>
-						<li>
-							<Link href='/category/1'>
-								<div className='flex flex-col items-center'>
-									<div>
-										<CategoryIcon />
-									</div>
-									<p className='p-4 block text-white text-center'>Суши</p>
-								</div>
-							</Link>
-						</li>
-						<li>
-							<Link href='/category/1'>
-								<div className='flex flex-col items-center'>
-									<div>
-										<CategoryIcon />
-									</div>
-									<p className='p-4 block text-white text-center'>
-										Основні блюда
-									</p>
-								</div>
-							</Link>
-						</li>
-						<li>
-							<Link href='/category/1'>
-								<div className='flex flex-col items-center'>
-									<div>
-										<CategoryIcon />
-									</div>
-									<p className='p-4 block text-white text-center'>
-										Бургери та шаурма
-									</p>
-								</div>
-							</Link>
-						</li>
-					</ul>
+					<CategoryList />
 				</div>
 			</div>
 		</>

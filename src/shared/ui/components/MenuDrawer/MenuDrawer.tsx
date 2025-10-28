@@ -40,7 +40,7 @@ export const MenuDrawer: React.FC<Props> = ({
 				{/* Menu Drawer Header */}
 				<div className='bg-[#000c26] text-white flex items-center pr-4'>
 					<Link href='/' className='flex items-center'>
-						<LogoIcon />
+						<LogoIcon className='fill-white' />
 
 						<p className='ml-3 uppercase font-bold text-xl'>Вилки палки</p>
 					</Link>

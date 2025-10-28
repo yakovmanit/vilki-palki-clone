@@ -1,4 +1,4 @@
-export const CategoryIcon = () => {
+export const CategoryIcon = ({ strokeColor }: { strokeColor: string }) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
@@ -7,11 +7,12 @@ export const CategoryIcon = () => {
 			viewBox='0 0 90 90'
 			width='50px'
 			height='50px'
+			stroke={strokeColor}
 		>
 			<defs>
 				<style>
 					{
-						'.cls-1,.cls-2,.cls-3{fill:none;stroke:#fff;stroke-width:4.25px}.cls-1,.cls-3{stroke-miterlimit:10}.cls-2{stroke-linejoin:round}.cls-2,.cls-3{stroke-linecap:round}'
+						'.cls-1,.cls-2,.cls-3{fill:none;stroke-width:3px}.cls-1,.cls-3{stroke-miterlimit:10}.cls-2{stroke-linejoin:round}.cls-2,.cls-3{stroke-linecap:round}'
 					}
 				</style>
 			</defs>
