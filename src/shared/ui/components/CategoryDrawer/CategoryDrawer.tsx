@@ -2,10 +2,10 @@ import React from 'react';
 import { cn } from '@shared/lib';
 import { CategoryList, MenuArrowIcon } from '@shared/ui';
 
-type Props = {
+interface Props {
 	isCatsDrawerOpen: boolean;
 	setIsCatsDrawerOpen: (isOpen: boolean) => void;
-};
+}
 
 export const CategoryDrawer: React.FC<Props> = ({
 	isCatsDrawerOpen,

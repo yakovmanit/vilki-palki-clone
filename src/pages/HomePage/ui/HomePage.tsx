@@ -1,12 +1,16 @@
-import { HeroSection } from './HeroSection'
-import { CategorySection } from './CategorySection'
+import { CategorySection } from './CategorySection';
+import { HeroSection } from './HeroSection';
+import { Filters } from "@/features"
 
 const HomePage = () => {
-	return (
-		<main>
-			<HeroSection />
 
-			<CategorySection />
+	return (
+		<main className='pb-100'>
+			<HeroSection className='pb-9' />
+
+			<CategorySection className='pb-9' />
+
+			<Filters />
 		</main>
 	);
 };

@@ -1,10 +1,18 @@
 import React from 'react';
-import { Button } from '@shared/ui';
+
 import Image from 'next/image';
 
-export const HeroSection: React.FC = () => {
+import { Button } from '@shared/ui';
+import { cn } from '@shared/lib';
+
+interface Props {
+	className?: string;
+}
+
+export const HeroSection: React.FC<Props> = ({ className }) => {
   return (
-		<section className='pb-9 flex flex-col items-center justify-between text-center h-[45vh] relative'>
+		<section
+			className={cn('flex flex-col items-center justify-between text-center h-[45vh] relative', className)}>
 			<Image
 				className='absolute w-full h-full object-cover brightness-65 -z-1'
 				width='1920'
