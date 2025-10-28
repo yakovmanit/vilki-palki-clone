@@ -1,11 +1,11 @@
 // ICONS
-export { LogoIcon } from './icons/Logo';
-export { MenuArrowIcon } from './icons/MenuArrow';
-export { CloseIcon } from './icons/Close';
+export { LogoIcon } from '@shared/ui/Icons/Logo';
+export { MenuArrowIcon } from '@shared/ui/Icons/MenuArrow';
+export { CloseIcon } from '@shared/ui/Icons/Close';
 
 // COMPONENTS
-export { Button } from './components/button/Button';
-export { Title } from './components/title/Title';
-export { MenuDrawer } from './components/menu-drawer/MenuDrawer';
-export { CategoryDrawer } from './components/category-drawer/CategoryDrawer';
-export { LocaleSwitcher } from './components/locale-switcher/LocaleSwitcher';
+export { Button } from './components/Button/Button';
+export { Title } from './components/Title/Title';
+export { MenuDrawer } from './components/MenuDrawer/MenuDrawer';
+export { CategoryDrawer } from './components/CategoryDrawer/CategoryDrawer';
+export { LocaleSwitcher } from './components/LocaleSwitcher/LocaleSwitcher';
