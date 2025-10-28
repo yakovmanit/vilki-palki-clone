@@ -1,6 +1,6 @@
 import { CategorySection } from './CategorySection';
 import { HeroSection } from './HeroSection';
-import { Filters } from "@/features"
+import { Filters } from "@/features/Filters";
 
 const HomePage = () => {
 

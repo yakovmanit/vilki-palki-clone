@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 
 import { cn } from '@shared/lib';
-import { CategoryDrawer, LocaleSwitcher, MenuDrawer } from '@shared/ui';
+import { CategoryDrawer, MenuDrawer } from '@shared/ui';
+import { LocaleSwitcher } from '@features/LocaleSwitcher';
 
 interface Props {
 	className?: string;

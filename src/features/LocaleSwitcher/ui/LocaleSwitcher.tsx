@@ -5,7 +5,7 @@ import { cn } from '@shared/lib';
 
 import { useLocale } from 'use-intl';
 import { usePathname, useRouter } from '@shared/lib/i18n';
-import { useLocalesWithoutCurrent } from './hooks/useLocalesWithoutCurrent';
+import { useLocalesWithoutCurrent } from '../hooks/useLocalesWithoutCurrent';
 
 interface Props {
   className?: string;
