@@ -10,3 +10,4 @@ export { MenuDrawer } from './components/MenuDrawer/MenuDrawer';
 export { CategoryDrawer } from './components/CategoryDrawer/CategoryDrawer';
 export { LocaleSwitcher } from './components/LocaleSwitcher/LocaleSwitcher';
 export { CategoryList } from './components/CategoryList/CategoryList';
+export { Container } from './components/Container/Container';
