@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, LogoIcon, Title } from '@shared/ui';
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+
 interface Props {
 	isMenuDrawerOpen: boolean;
 	setIsMenuDrawerOpen: (isOpen: boolean) => void;
@@ -21,16 +23,26 @@ export const MenuDrawer: React.FC<Props> = ({
 
 	const ref = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
+	const handleMenuDrawerOpen = () => {
+		if (!ref.current) return;
 
-	}, []);
+		setIsMenuDrawerOpen(true);
+		disableBodyScroll(ref.current);
+	}
+
+	const handleMenuDrawerClose = () => {
+		if (!ref.current) return;
+
+		setIsMenuDrawerOpen(false);
+		enableBodyScroll(ref.current);
+	}
 
 	return (
 		<>
 			{/* Menu burger */}
 			<div
-				onClick={() => setIsMenuDrawerOpen(true)}
-				onMouseEnter={() => setIsMenuDrawerOpen(true)}
+				onClick={() => handleMenuDrawerOpen()}
+				onMouseEnter={() => handleMenuDrawerOpen()}
 				ref={ref}
 				className='-translate-x-13'
 			>
@@ -44,7 +56,7 @@ export const MenuDrawer: React.FC<Props> = ({
 							'opacity-0 -z-10 pointer-events-none': !isMenuDrawerOpen,
 						})
 				}
-				onMouseEnter={() => setIsMenuDrawerOpen(false)}
+				onMouseEnter={() => handleMenuDrawerClose()}
 			/>
 
 			{/* Menu Drawer */}
@@ -64,7 +76,7 @@ export const MenuDrawer: React.FC<Props> = ({
 						<p className='ml-3 uppercase font-bold text-xl'>Вилки палки</p>
 					</Link>
 
-					<button onClick={() => setIsMenuDrawerOpen(false)} className='ml-auto cursor-pointer p-2'>
+					<button onClick={() => handleMenuDrawerClose()} className='ml-auto cursor-pointer p-2'>
 						<CloseIcon />
 					</button>
 				</div>

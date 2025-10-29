@@ -1,7 +1,11 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 
 import { cn } from '@shared/lib';
 import { CategoryList, MenuArrowIcon } from '@shared/ui';
+
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 interface Props {
 	isCatsDrawerOpen: boolean;
@@ -12,11 +16,28 @@ export const CategoryDrawer: React.FC<Props> = ({
 	isCatsDrawerOpen,
 	setIsCatsDrawerOpen,
 }) => {
+	const ref = useRef<HTMLDivElement>(null);
+
+	const handleCatsDrawerOpen = () => {
+		if (!ref.current) {
+			return;
+		}
+
+		if (isCatsDrawerOpen) {
+			enableBodyScroll(ref.current);
+		} else {
+			disableBodyScroll(ref.current);
+		}
+
+		setIsCatsDrawerOpen(!isCatsDrawerOpen);
+	}
+
 	return (
 		<>
 			{/* Cats Drawer Button */}
 			<div
-				onClick={() => setIsCatsDrawerOpen(!isCatsDrawerOpen)}
+				ref={ref}
+				onClick={() => handleCatsDrawerOpen()}
 				className='flex items-center gap-2 transform -translate-x-2 cursor-pointer'
 			>
 				<p className='text-white uppercase font-bold text-lg'>Меню</p>
