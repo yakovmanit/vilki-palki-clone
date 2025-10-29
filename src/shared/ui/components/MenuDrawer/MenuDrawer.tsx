@@ -2,13 +2,12 @@
 
 import React, { useRef } from 'react';
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, LogoIcon, Title } from '@shared/ui';
-
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 interface Props {
 	isMenuDrawerOpen: boolean;
@@ -28,14 +27,14 @@ export const MenuDrawer: React.FC<Props> = ({
 
 		setIsMenuDrawerOpen(true);
 		disableBodyScroll(ref.current);
-	}
+	};
 
 	const handleMenuDrawerClose = () => {
 		if (!ref.current) return;
 
 		setIsMenuDrawerOpen(false);
 		enableBodyScroll(ref.current);
-	}
+	};
 
 	return (
 		<>
@@ -50,12 +49,12 @@ export const MenuDrawer: React.FC<Props> = ({
 			</div>
 
 			<div
-				className={
-					cn('fixed w-full h-full z-10 top-0 left-0 bg-black opacity-50 transition duration-300',
-						{
-							'opacity-0 -z-10 pointer-events-none': !isMenuDrawerOpen,
-						})
-				}
+				className={cn(
+					'fixed w-full h-full z-10 top-0 left-0 bg-black opacity-50 transition duration-300',
+					{
+						'opacity-0 -z-10 pointer-events-none': !isMenuDrawerOpen,
+					},
+				)}
 				onMouseEnter={() => handleMenuDrawerClose()}
 			/>
 
@@ -76,7 +75,10 @@ export const MenuDrawer: React.FC<Props> = ({
 						<p className='ml-3 uppercase font-bold text-xl'>Вилки палки</p>
 					</Link>
 
-					<button onClick={() => handleMenuDrawerClose()} className='ml-auto cursor-pointer p-2'>
+					<button
+						onClick={() => handleMenuDrawerClose()}
+						className='ml-auto cursor-pointer p-2'
+					>
 						<CloseIcon />
 					</button>
 				</div>

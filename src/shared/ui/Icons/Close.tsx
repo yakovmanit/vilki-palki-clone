@@ -1,4 +1,8 @@
-export const CloseIcon = ({ className = 'stroke-white' }: { className?: string }) => {
+export const CloseIcon = ({
+	className = 'stroke-white',
+}: {
+	className?: string;
+}) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'

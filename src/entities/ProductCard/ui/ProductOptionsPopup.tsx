@@ -1,29 +1,35 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { cn } from '@shared/lib';
-import { CloseIcon, Container, Title } from '@shared/ui';
-import { Options } from './Options';
 
 import { enableBodyScroll } from 'body-scroll-lock';
+
+import { cn } from '@shared/lib';
+import { CloseIcon, Container, Title } from '@shared/ui';
+
+import { Options } from './Options';
 
 interface Props {
 	isOpen: boolean;
 	closePopup: (value: boolean) => void;
-  className?: string;
+	className?: string;
 }
 
-export const ProductOptionsPopup: React.FC<Props> = ({ className, isOpen, closePopup }) => {
+export const ProductOptionsPopup: React.FC<Props> = ({
+	className,
+	isOpen,
+	closePopup,
+}) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handleClosePopup = () => {
 		if (!ref.current) return;
 
-		closePopup(false)
+		closePopup(false);
 		enableBodyScroll(ref.current);
-	}
+	};
 
-  return (
+	return (
 		<div
 			ref={ref}
 			className={cn(

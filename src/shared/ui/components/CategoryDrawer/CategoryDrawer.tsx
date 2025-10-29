@@ -2,10 +2,10 @@
 
 import React, { useRef } from 'react';
 
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+
 import { cn } from '@shared/lib';
 import { CategoryList, MenuArrowIcon } from '@shared/ui';
-
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 interface Props {
 	isCatsDrawerOpen: boolean;
@@ -30,7 +30,7 @@ export const CategoryDrawer: React.FC<Props> = ({
 		}
 
 		setIsCatsDrawerOpen(!isCatsDrawerOpen);
-	}
+	};
 
 	return (
 		<>

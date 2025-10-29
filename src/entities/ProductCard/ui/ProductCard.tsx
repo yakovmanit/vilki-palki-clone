@@ -2,13 +2,13 @@
 
 import React, { useRef, useState } from 'react';
 
+import { disableBodyScroll } from 'body-scroll-lock';
 import Image from 'next/image';
 
 import { cn } from '@shared/lib';
 import { Title } from '@shared/ui';
-import { ProductOptionsPopup } from './ProductOptionsPopup';
 
-import { disableBodyScroll } from 'body-scroll-lock';
+import { ProductOptionsPopup } from './ProductOptionsPopup';
 
 interface Props {
 	className?: string;
@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({ className }) => {
 
 		setIsProductPopupOpen(true);
 		disableBodyScroll(ref.current);
-	}
+	};
 
 	return (
 		<div

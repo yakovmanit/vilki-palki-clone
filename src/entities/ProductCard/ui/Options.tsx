@@ -7,28 +7,31 @@ import { cn } from '@shared/lib';
 import { Title } from '@shared/ui';
 
 interface Props {
-	title?: string
-  className?: string;
+	title?: string;
+	className?: string;
 }
 
 const options = [
 	{
 		id: 1,
-		imageIrl: 'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
+		imageIrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
 		name: 'Подвійна курка 1',
 		price: 100,
 		weight: 75,
 	},
 	{
 		id: 2,
-		imageIrl: 'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
+		imageIrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
 		name: 'Подвійна курка 2',
 		price: 100,
 		weight: 75,
 	},
 	{
 		id: 3,
-		imageIrl: 'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
+		imageIrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1756373540куркаааа.png.webp',
 		name: 'Подвійна курка 3',
 		price: 100,
 		weight: 75,
@@ -40,15 +43,15 @@ export const Options: React.FC<Props> = ({ className, title }) => {
 
 	const handleSelectedOptions = (id: number) => {
 		if (!selectedOptions.includes(id)) {
-			setSelectedOptions([...selectedOptions, id])
+			setSelectedOptions([...selectedOptions, id]);
 		} else {
-			const filteredOptions = selectedOptions.filter(_id => _id !== id);
+			const filteredOptions = selectedOptions.filter((_id) => _id !== id);
 
 			setSelectedOptions(filteredOptions);
 		}
-	}
-	
-  return (
+	};
+
+	return (
 		<div className='mb-8'>
 			<Title
 				className='text-custom-gray mt-4 mb-6'
@@ -57,7 +60,7 @@ export const Options: React.FC<Props> = ({ className, title }) => {
 			/>
 
 			<ul className={cn('grid grid-cols-3 gap-2', className)}>
-				{options.map(option => (
+				{options.map((option) => (
 					<li onClick={() => handleSelectedOptions(option.id)} key={option.id}>
 						<button
 							className={cn(
