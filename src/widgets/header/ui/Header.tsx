@@ -16,7 +16,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 
 	return (
 		<header
-			className={cn('bg-primary flex items-center justify-between', className)}
+			className={cn('bg-primary flex items-center justify-between fixed w-full z-20', className)}
 		>
 			<MenuDrawer
 				isMenuDrawerOpen={isMenuDrawerOpen}

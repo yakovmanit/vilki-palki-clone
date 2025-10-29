@@ -7,7 +7,7 @@ import { HeroSection } from './HeroSection';
 
 const HomePage = () => {
 	return (
-		<main className='pb-100'>
+		<main className='pb-100 pt-[54px]'>
 			<HeroSection className='pb-9' />
 
 			<CategorySection className='pb-9' />
