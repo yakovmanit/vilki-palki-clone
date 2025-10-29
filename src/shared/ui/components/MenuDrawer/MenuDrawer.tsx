@@ -1,11 +1,10 @@
 import React from 'react';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, LogoIcon, Title } from '@shared/ui';
-
-import { useTranslations } from 'next-intl';
 
 interface Props {
 	isMenuDrawerOpen: boolean;
@@ -60,9 +59,7 @@ export const MenuDrawer: React.FC<Props> = ({
 							бонусів можна частково або повністю розрахуватися за замовлення.
 						</p>
 
-						<Button variant='pink'>
-							{t('signin')}
-						</Button>
+						<Button variant='pink'>{t('signin')}</Button>
 					</div>
 
 					<nav className='px-6 py-10'>

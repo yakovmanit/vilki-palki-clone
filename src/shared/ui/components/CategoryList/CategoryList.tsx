@@ -1,25 +1,18 @@
 import React from 'react';
 
-
-
 import Link from 'next/link';
-
-
 
 import { cn } from '@shared/lib';
 
-
-
 import { CategoryIcon } from '../../../../../public/assets/CategoryIcon';
 
-
 interface Props {
-  className?: string;
+	className?: string;
 	isHomeElement?: boolean;
 }
 
 export const CategoryList: React.FC<Props> = ({ className, isHomeElement }) => {
-  return (
+	return (
 		<ul className={cn('grid grid-cols-3 gap-2', className)}>
 			{[...new Array(10)].map((_, i) => (
 				<li key={i}>

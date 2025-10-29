@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 
+import { LocaleSwitcher } from '@features/LocaleSwitcher';
 import { cn } from '@shared/lib';
 import { CategoryDrawer, MenuDrawer } from '@shared/ui';
-import { LocaleSwitcher } from '@features/LocaleSwitcher';
 
 interface Props {
 	className?: string;

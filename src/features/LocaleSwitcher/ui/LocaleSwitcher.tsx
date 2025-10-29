@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { cn } from '@shared/lib';
 
 import { useLocale } from 'use-intl';
+
+import { cn } from '@shared/lib';
 import { usePathname, useRouter } from '@shared/lib/i18n';
+
 import { useLocalesWithoutCurrent } from '../hooks/useLocalesWithoutCurrent';
 
 interface Props {
-  className?: string;
+	className?: string;
 }
 
 export const LocaleSwitcher: React.FC<Props> = () => {
@@ -31,13 +33,13 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 			if (!e.composedPath().includes(localeRef.current)) {
 				setIsLocaleSwitcherOpen(false);
 			}
-		}
+		};
 
 		document.body.addEventListener('click', handleClickOutside);
 
 		return () => {
 			document.body.removeEventListener('click', handleClickOutside);
-		}
+		};
 	}, []);
 
 	const switchLocale = (newLocale: string) => {
@@ -47,7 +49,7 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 		}
 	};
 
-  return (
+	return (
 		<div
 			className='w-[54px] h-[54px]  text-custom-gray relative flex items-center justify-center group'
 			onClick={() => setIsLocaleSwitcherOpen(!isLocaleSwitcherOpen)}
@@ -59,8 +61,8 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 				className={cn(
 					'absolute top-full left-0 w-full bg-custom-pink text-white cursor-pointer group-hover:block hidden z-10',
 					{
-						'block': isLocaleSwitcherOpen
-					}
+						block: isLocaleSwitcherOpen,
+					},
 				)}
 			>
 				{localesWithoutCurrent.map((loc) => (
@@ -74,5 +76,5 @@ export const LocaleSwitcher: React.FC<Props> = () => {
 				))}
 			</div>
 		</div>
-  );
+	);
 };

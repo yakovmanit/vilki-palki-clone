@@ -1,7 +1,9 @@
 import { Filters } from '@/features/Filters';
+
 import { ProductCardList } from '@entities/ProductCardList';
-import { HeroSection } from './HeroSection';
+
 import { CategorySection } from './CategorySection';
+import { HeroSection } from './HeroSection';
 
 const HomePage = () => {
 	return (

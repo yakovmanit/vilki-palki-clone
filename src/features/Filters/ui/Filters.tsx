@@ -1,20 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button, Container, Title } from '@shared/ui';
-import { cn } from '@shared/lib';
 
-const cats = [
-	'Все',
-	'Піца',
-	'Суші',
-	'Бургери',
-]
+import { cn } from '@shared/lib';
+import { Button, Container, Title } from '@shared/ui';
+
+const cats = ['Все', 'Піца', 'Суші', 'Бургери'];
 
 export const Filters: React.FC = () => {
 	const [activeCat, setActiveCat] = useState(0);
 
-  return (
+	return (
 		<section>
 			<Container>
 				<Title size='xl' text='Доставка їжі' />
@@ -27,7 +23,8 @@ export const Filters: React.FC = () => {
 								size='rounded'
 								variant='plain'
 								className={cn({
-									'bg-custom-pink text-custom-blue border-custom-pink': activeCat === i,
+									'bg-custom-pink text-custom-blue border-custom-pink':
+										activeCat === i,
 								})}
 								onClick={() => setActiveCat(i)}
 							>
@@ -38,5 +35,5 @@ export const Filters: React.FC = () => {
 				</ul>
 			</Container>
 		</section>
-  );
+	);
 };

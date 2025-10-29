@@ -1,11 +1,12 @@
 import '../global.css';
 
-import { Header } from '@widgets/header';
-import { hasLocale } from 'use-intl';
-import { routing } from '@shared/lib/i18n';
-import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { hasLocale } from 'use-intl';
+
+import { routing } from '@shared/lib/i18n';
+import { Header } from '@widgets/header';
 
 export const metadata = {
 	title: 'Next.js',
