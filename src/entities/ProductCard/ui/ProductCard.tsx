@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Image from 'next/image';
 
 import { cn } from '@shared/lib';
 import { Title } from '@shared/ui';
+import { ProductOptionsPopup } from './ProductOptionsPopup';
+
+import { disableBodyScroll } from 'body-scroll-lock';
 
 interface Props {
 	className?: string;
@@ -13,14 +16,29 @@ interface Props {
 
 export const ProductCard: React.FC<Props> = ({ className }) => {
 	const [count, setCount] = useState(1);
+	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
+	const ref = useRef<HTMLDivElement>(null);
+
+	const handleProductPopupOpen = () => {
+		if (!ref.current) return;
+
+		setIsProductPopupOpen(true);
+		disableBodyScroll(ref.current);
+	}
 
 	return (
 		<div
+			ref={ref}
 			className={cn(
 				'rounded-md overflow-hidden border border-gray-200',
 				className,
 			)}
 		>
+			<ProductOptionsPopup
+				isOpen={isProductPopupOpen}
+				closePopup={setIsProductPopupOpen}
+			/>
+
 			<div>
 				<Image
 					src='https://vilki-palki.od.ua/storage/img-cache/500_500_1760547314піцазлимоном.jpg.webp'
@@ -90,7 +108,10 @@ export const ProductCard: React.FC<Props> = ({ className }) => {
 				</div>
 			</div>
 
-			<button className='flex justify-center items-center p-2 bg-custom-blue w-full'>
+			<button
+				onClick={() => handleProductPopupOpen()}
+				className='flex justify-center items-center p-2 bg-custom-blue w-full cursor-pointer'
+			>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					width='24'

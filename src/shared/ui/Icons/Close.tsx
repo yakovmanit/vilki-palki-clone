@@ -1,14 +1,13 @@
-export const CloseIcon = () => {
+export const CloseIcon = ({ className = 'stroke-white' }: { className?: string }) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
 			width='16px'
 			height='16px'
-			fill='none'
 			viewBox='0 0 34 34'
+			className={className}
 		>
 			<path
-				stroke='#fff'
 				strokeLinecap='round'
 				strokeLinejoin='round'
 				strokeMiterlimit={10}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
