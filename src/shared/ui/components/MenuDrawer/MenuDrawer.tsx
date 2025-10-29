@@ -2,19 +2,11 @@
 
 import React, { useEffect, useRef } from 'react';
 
-
-
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-
-
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, LogoIcon, Title } from '@shared/ui';
-
-
-
-
 
 interface Props {
 	isMenuDrawerOpen: boolean;
@@ -49,7 +41,7 @@ export const MenuDrawer: React.FC<Props> = ({
 				className={
 					cn('fixed w-full h-full z-10 top-0 left-0 bg-black opacity-50 transition duration-300',
 						{
-							'opacity-0 -z-10': !isMenuDrawerOpen,
+							'opacity-0 -z-10 pointer-events-none': !isMenuDrawerOpen,
 						})
 				}
 				onMouseEnter={() => setIsMenuDrawerOpen(false)}
