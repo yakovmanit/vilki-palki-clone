@@ -14,7 +14,7 @@ const buttonStyles = cva(
 					'bg-custom-blue text-white hover:bg-custom-pink hover:text-custom-blue focus-visible:ring-blue-300',
 				pink: 'bg-custom-pink text-custom-blue hover:bg-custom-pink-light focus-visible:ring-pink-300 focus:bg-custom-pink-dark',
 				plain:
-					'bg-white text-custom-gray-dark border border-gray-200 hover:bg-gray-500',
+					'bg-white text-custom-gray-dark border border-gray-200 cursor-pointer',
 			},
 			size: {
 				default: 'h-12 px-4 py-2',
