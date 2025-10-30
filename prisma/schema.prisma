@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id       Int    @id @default(autoincrement())
+  titleUK  String
+  titleEN  String
+  slug     String @unique
+  price    Int
+  imageUrl String
+
+  ingredients Ingredient[]
+
+  options Option[]
+
+  category Category[]
+}
+
+model Ingredient {
+  id       Int    @id @default(autoincrement())
+  titleUK  String
+  titleEN  String
+  price    Int
+  imageUrl String
+  weight   Int
+
+  product Product[]
+
+  option Option[]
+}
+
+model Option {
+  id       Int     @id @default(autoincrement())
+  required Boolean
+
+  ingredients Ingredient[]
+
+  product Product[]
+}
+
+model Category {
+  id      Int    @id @default(autoincrement())
+  titleUK String
+  titleEN String
+  slug    String @unique
+
+  products Product[]
+
+  parentCategoryId Int?
+  parentCategory   Category?  @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
+  category         Category[] @relation("CategoryToCategory")
+}
