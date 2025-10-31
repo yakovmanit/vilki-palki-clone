@@ -4,7 +4,8 @@ export const ingredients = [
 		titleUK: 'З сиром Філадельфія',
 		titleEN: 'With Philadelphia cheese',
 		price: 50,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/1616060487Syr-Philadelphia.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1616060487Syr-Philadelphia.png.webp',
 		weight: 100,
 	},
 	{
@@ -20,7 +21,8 @@ export const ingredients = [
 		titleUK: 'Томатний Чилі',
 		titleEN: 'Tomato Chili',
 		price: 0,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/1617355497Sous-Tomatnyi-Chili.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1617355497Sous-Tomatnyi-Chili.png.webp',
 		weight: 35,
 	},
 	{
@@ -28,7 +30,8 @@ export const ingredients = [
 		titleUK: 'Французький',
 		titleEN: 'French',
 		price: 0,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/1617355478Sous-Francuzkyi-.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/1617355478Sous-Francuzkyi-.png.webp',
 		weight: 35,
 	},
 	{
@@ -36,7 +39,8 @@ export const ingredients = [
 		titleUK: 'Без цибулі',
 		titleEN: 'Without onion',
 		price: 0,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/16838022778-removebg-preview.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/16838022778-removebg-preview.png.webp',
 		weight: 0,
 	},
 	{
@@ -44,7 +48,8 @@ export const ingredients = [
 		titleUK: 'Мисливські ковбаски',
 		titleEN: 'Hunting sausages',
 		price: 0,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/16088995281608899528Ohotnichi-kolbaski.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/16088995281608899528Ohotnichi-kolbaski.png.webp',
 		weight: 0,
 	},
 	{
@@ -52,10 +57,11 @@ export const ingredients = [
 		titleUK: 'Сир моцарела',
 		titleEN: 'Mozzarella cheese',
 		price: 0,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/16079438961607943896Syr-Mocarella.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/16079438961607943896Syr-Mocarella.png.webp',
 		weight: 0,
-	}
-]
+	},
+];
 
 export const categories = [
 	// Main categories
@@ -64,7 +70,8 @@ export const categories = [
 		titleUK: 'Все',
 		titleEN: 'All',
 		slug: 'all',
-		imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Fru%2Ffree-icon%2Fgroceries_6805578&psig=AOvVaw31Qxi8J1097ENJJKNtl5TW&ust=1761996767385000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLCAyc-rzpADFQAAAAAdAAAAABAE',
+		imageUrl:
+			'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Fru%2Ffree-icon%2Fgroceries_6805578&psig=AOvVaw31Qxi8J1097ENJJKNtl5TW&ust=1761996767385000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLCAyc-rzpADFQAAAAAdAAAAABAE',
 	},
 	{
 		id: 2,
@@ -78,21 +85,21 @@ export const categories = [
 		titleUK: 'Суші',
 		titleEN: 'Sushi',
 		slug: 'sushi',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/129/129300.png'
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/129/129300.png',
 	},
 	{
 		id: 4,
 		titleUK: 'Піца',
 		titleEN: 'Pizza',
 		slug: 'pizza',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/599/599995.png'
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/599/599995.png',
 	},
 	{
 		id: 5,
 		titleUK: 'Напої',
 		titleEN: 'Drinks',
 		slug: 'drinks',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3132/3132691.png'
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3132/3132691.png',
 	},
 	// Subcategories for Роли
 	{
@@ -139,7 +146,7 @@ export const categories = [
 		slug: 'vegetarian-pizza',
 		parentCategoryId: 4,
 	},
-]
+];
 
 export const products = [
 	// Гарячі роли (Hot rolls)
@@ -149,7 +156,8 @@ export const products = [
 		titleEN: 'Roll Banzai',
 		slug: 'roll-banzai',
 		price: 280,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/97/20/1729021525банзайфон.jpg',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/97/20/1729021525банзайфон.jpg',
 		weight: 270,
 	},
 	{
@@ -158,7 +166,8 @@ export const products = [
 		titleEN: 'Boston',
 		slug: 'boston',
 		price: 300,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/20/83/1729020824бостонфон.jpg',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/20/83/1729020824бостонфон.jpg',
 		weight: 340,
 	},
 	// Холодні роли (Cold rolls)
@@ -177,7 +186,8 @@ export const products = [
 		titleEN: 'Yamato Roll',
 		slug: 'yamato-roll',
 		price: 230,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/37/5c/1729021026яматофон.jpg',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/37/5c/1729021026яматофон.jpg',
 		weight: 280,
 	},
 	// Нігірі (Nigiri)
@@ -187,7 +197,8 @@ export const products = [
 		titleEN: 'Salmon Nigiri ',
 		slug: 'nigiri-salmon',
 		price: 43,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/92/fd/1622562660НигириСемга.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/92/fd/1622562660НигириСемга.png',
 		weight: 35,
 	},
 	{
@@ -196,7 +207,8 @@ export const products = [
 		titleEN: 'Eel Nigiri',
 		slug: 'eel-nigiri',
 		price: 55,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/67/51/1622562469НигириУгорь.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/67/51/1622562469НигириУгорь.png',
 		weight: 38,
 	},
 	// Гункан (Gunkan)
@@ -206,7 +218,8 @@ export const products = [
 		titleEN: 'Salmon Gunkan',
 		slug: 'gunkan-salmon',
 		price: 75,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/bb/19/1622562993ГунканСемга.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/bb/19/1622562993ГунканСемга.png',
 		weight: 45,
 	},
 	{
@@ -215,7 +228,8 @@ export const products = [
 		titleEN: 'Eel Gunkan',
 		slug: 'eel-gunkan',
 		price: 85,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img-cache/gunkan-crab.png.webp',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img-cache/gunkan-crab.png.webp',
 		weight: 48,
 	},
 	// М'ясна піца (Meat pizza)
@@ -230,7 +244,7 @@ export const products = [
 	},
 	{
 		id: 10,
-		titleUK: 'Піца М\'ясна',
+		titleUK: "Піца М'ясна",
 		titleEN: 'Pizza Meat',
 		slug: 'pizza-meat',
 		price: 400,
@@ -263,7 +277,8 @@ export const products = [
 		titleEN: 'Coca-Cola',
 		slug: 'coca-cola',
 		price: 40,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/b1/5f/16242801651623150280кока-кола.jpg',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/b1/5f/16242801651623150280кока-кола.jpg',
 		weight: 500,
 	},
 	{
@@ -272,7 +287,8 @@ export const products = [
 		titleEN: 'Fanta',
 		slug: 'fanta',
 		price: 40,
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/47/74/16242801141623150313фанта.jpg',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/47/74/16242801141623150313фанта.jpg',
 		weight: 500,
 	},
-]
+];

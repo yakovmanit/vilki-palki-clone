@@ -1,5 +1,5 @@
-import { prisma } from "./prisma-client";
-import { ingredients, categories, products } from './constants';
+import { categories, ingredients, products } from './constants';
+import { prisma } from './prisma-client';
 
 async function up() {
 	// 1. Create Ingredients
@@ -274,7 +274,6 @@ export async function main() {
 		await down();
 
 		await up();
-
 	} catch (err) {
 		console.log('PRISMA ERR', err);
 	}
@@ -282,10 +281,10 @@ export async function main() {
 
 main()
 	.then(async () => {
-		await prisma.$disconnect()
+		await prisma.$disconnect();
 	})
 	.catch(async (e) => {
-		console.error(e)
-		await prisma.$disconnect()
-		process.exit(1)
-	})
+		console.error(e);
+		await prisma.$disconnect();
+		process.exit(1);
+	});
