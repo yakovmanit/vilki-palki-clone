@@ -61,7 +61,7 @@ async function up() {
 		where: { id: 1 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 6 }], // Все + Гарячі роли
+				connect: [{ id: 1 }, { id: 2 }, { id: 6 }], // Все + Роли + Гарячі роли
 			},
 			options: {
 				connect: [{ id: option1.id }, { id: option2.id }],
@@ -76,7 +76,7 @@ async function up() {
 		where: { id: 2 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 6 }], // Все + Гарячі роли
+				connect: [{ id: 1 }, { id: 2 }, { id: 6 }], // Все + Роли + Гарячі роли
 			},
 			options: {
 				connect: [{ id: option1.id }, { id: option2.id }],
@@ -92,7 +92,7 @@ async function up() {
 		where: { id: 3 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 7 }], // Все + Холодні роли
+				connect: [{ id: 1 }, { id: 2 }, { id: 7 }], // Все + Роли + Холодні роли
 			},
 			options: {
 				connect: [{ id: option1.id }, { id: option2.id }],
@@ -107,7 +107,7 @@ async function up() {
 		where: { id: 4 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 7 }], // Все + Холодні роли
+				connect: [{ id: 1 }, { id: 2 }, { id: 7 }], // Все + Роли + Холодні роли
 			},
 			options: {
 				connect: [{ id: option1.id }, { id: option2.id }],
@@ -123,7 +123,7 @@ async function up() {
 		where: { id: 5 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 8 }], // Все + Нігірі
+				connect: [{ id: 1 }, { id: 3 }, { id: 8 }], // Все + Суші + Нігірі
 			},
 			options: {
 				connect: [{ id: option1.id }],
@@ -138,7 +138,7 @@ async function up() {
 		where: { id: 6 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 8 }], // Все + Нігірі
+				connect: [{ id: 1 }, { id: 3 }, { id: 8 }], // Все + Суші + Нігірі
 			},
 			options: {
 				connect: [{ id: option1.id }],
@@ -154,7 +154,7 @@ async function up() {
 		where: { id: 7 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 9 }], // Все + Гункан
+				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
 			},
 			options: {
 				connect: [{ id: option1.id }],
@@ -169,7 +169,7 @@ async function up() {
 		where: { id: 8 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 9 }], // Все + Гункан
+				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
 			},
 			options: {
 				connect: [{ id: option1.id }],
@@ -185,7 +185,7 @@ async function up() {
 		where: { id: 9 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 10 }], // Все + М'ясна піца
+				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
 			},
 			options: {
 				connect: [{ id: option3.id }],
@@ -200,7 +200,7 @@ async function up() {
 		where: { id: 10 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 10 }], // Все + М'ясна піца
+				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
 			},
 			options: {
 				connect: [{ id: option3.id }],
@@ -216,7 +216,7 @@ async function up() {
 		where: { id: 11 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 11 }], // Все + Вегетаріанська піца
+				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
 			},
 			options: {
 				connect: [{ id: option3.id }],
@@ -231,7 +231,7 @@ async function up() {
 		where: { id: 12 },
 		data: {
 			category: {
-				connect: [{ id: 1 }, { id: 11 }], // Все + Вегетаріанська піца
+				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
 			},
 			options: {
 				connect: [{ id: option3.id }],
