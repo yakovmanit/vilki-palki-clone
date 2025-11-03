@@ -4,10 +4,9 @@ import React, { useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
+import { CategoryList } from '@entities/CategoryList';
 import { cn } from '@shared/lib';
 import { MenuArrowIcon } from '@shared/ui';
-import { CategoryList } from '@entities/CategoryList';
-
 
 export const CategoryDrawer: React.FC = () => {
 	const [isCatsDrawerOpen, setIsCatsDrawerOpen] = useState(false);

@@ -6,7 +6,7 @@ interface CategoryIdState {
 
 const initialState: CategoryIdState = {
 	activeCategoryId: 1,
-}
+};
 
 export const authSlice = createSlice({
 	name: 'category',

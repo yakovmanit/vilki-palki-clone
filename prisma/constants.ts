@@ -70,8 +70,7 @@ export const categories = [
 		titleUK: 'Все',
 		titleEN: 'All',
 		slug: 'all',
-		imageUrl:
-			'https://cdn-icons-png.flaticon.com/512/6805/6805578.png',
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/6805/6805578.png',
 	},
 	{
 		id: 2,

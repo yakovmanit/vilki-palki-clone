@@ -1,20 +1,15 @@
-import {api} from "./api";
 import { Category } from '@prisma/client';
 
-const categoryApi = api
-	.injectEndpoints({
-		endpoints: (build) => ({
-			getCategory: build.query<
-				Category[],
-				void
-			>({
-				query: () => ({
-					url: 'category',
-				}),
+import { api } from './api';
+
+const categoryApi = api.injectEndpoints({
+	endpoints: (build) => ({
+		getCategory: build.query<Category[], void>({
+			query: () => ({
+				url: 'category',
 			}),
 		}),
-	});
+	}),
+});
 
-export const {
-	useGetCategoryQuery,
-} = categoryApi;
+export const { useGetCategoryQuery } = categoryApi;

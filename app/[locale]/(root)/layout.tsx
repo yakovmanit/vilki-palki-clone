@@ -6,6 +6,7 @@ import { hasLocale } from 'use-intl';
 
 import { routing } from '@shared/lib/i18n';
 import { Header } from '@widgets/header';
+
 import { ClientProviders, ServerProviders } from './providers';
 
 export const metadata = {
