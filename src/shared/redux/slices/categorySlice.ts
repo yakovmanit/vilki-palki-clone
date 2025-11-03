@@ -8,7 +8,7 @@ const initialState: CategoryIdState = {
 	activeCategoryId: 1,
 };
 
-export const authSlice = createSlice({
+export const categorySlice = createSlice({
 	name: 'category',
 	initialState,
 	reducers: {
@@ -18,4 +18,6 @@ export const authSlice = createSlice({
 	},
 });
 
-export default authSlice.reducer;
+export const { setCategoryId } = categorySlice.actions;
+
+export default categorySlice.reducer;

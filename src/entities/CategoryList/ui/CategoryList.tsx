@@ -8,18 +8,14 @@ import { cn } from '@shared/lib';
 import { useGetCategoryQuery } from '@shared/redux/api/categoryApi';
 
 import { CategoryListSkeleton } from './CategoryListSkeleton';
+import { useCategoryItems } from '@shared/hooks';
 
 interface Props {
 	className?: string;
 }
 
 export const CategoryList: React.FC<Props> = ({ className }) => {
-	const { data: allCategories, isLoading: isCategoriesLoading } =
-		useGetCategoryQuery();
-
-	const parentCategories = allCategories?.filter(
-		(category) => !category.parentCategoryId,
-	);
+	const { isCategoriesLoading, parentCategories } = useCategoryItems();
 
 	if (isCategoriesLoading) {
 		return <CategoryListSkeleton />;

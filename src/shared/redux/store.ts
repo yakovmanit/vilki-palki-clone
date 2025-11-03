@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import categories from './slices/categorySlice';
 
 import { api } from './api/api';
 
 export const store = configureStore({
 	reducer: {
 		// Reducers
-		// auth: authReducer,
+		categories,
 
 		// Endpoints
 		[api.reducerPath]: api.reducer,
