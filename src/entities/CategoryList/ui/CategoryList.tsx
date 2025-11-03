@@ -14,9 +14,9 @@ interface Props {
 }
 
 export const CategoryList: React.FC<Props> = ({ className }) => {
-	const { data: categories, isLoading: isCategoriesLoading } = useGetCategoryQuery();
+	const { data: allCategories, isLoading: isCategoriesLoading } = useGetCategoryQuery();
 
-	console.log('categories redux: ', categories);
+	const parentCategories = allCategories?.filter(category => !category.parentCategoryId);
 
 	if (isCategoriesLoading) {
 		return <CategoryListSkeleton />
@@ -24,14 +24,14 @@ export const CategoryList: React.FC<Props> = ({ className }) => {
 
 	return (
 		<ul className={cn('grid grid-cols-3 gap-2', className)}>
-			{categories?.map(category => (
+			{parentCategories?.map(category => (
 				<li key={category.id}>
 					<Link href={`/category/${category.slug}`}>
 						<div className='flex flex-col items-center'>
-							<div>
+							<div className='w-12 h-12'>
 								{
 									category.imageUrl && (
-										<img src={category.imageUrl} alt={category.titleUK} />
+										<img className='w-full h-full' src={category.imageUrl} alt={category.titleUK} />
 									)
 								}
 							</div>

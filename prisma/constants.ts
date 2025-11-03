@@ -71,7 +71,7 @@ export const categories = [
 		titleEN: 'All',
 		slug: 'all',
 		imageUrl:
-			'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Fru%2Ffree-icon%2Fgroceries_6805578&psig=AOvVaw31Qxi8J1097ENJJKNtl5TW&ust=1761996767385000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLCAyc-rzpADFQAAAAAdAAAAABAE',
+			'https://cdn-icons-png.flaticon.com/512/6805/6805578.png',
 	},
 	{
 		id: 2,
