@@ -9,12 +9,25 @@ import { cn } from '@shared/lib';
 import { Title } from '@shared/ui';
 
 import { ProductOptionsPopup } from './ProductOptionsPopup';
+import { Ingredient } from '@prisma/client';
+import { OptionWithIngredients } from '@shared/model/types';
 
 interface Props {
 	className?: string;
+	id: number;
+	titleUK: string;
+	titleEN: string;
+	price: number;
+	slug: string;
+	weight: number;
+	imageUrl: string;
+	ingredients: Ingredient[];
+	options: OptionWithIngredients[];
 }
 
-export const ProductCard: React.FC<Props> = ({ className }) => {
+export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, price, slug, weight, imageUrl, ingredients, options }) => {
+
+
 	const [count, setCount] = useState(1);
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
@@ -35,13 +48,16 @@ export const ProductCard: React.FC<Props> = ({ className }) => {
 			)}
 		>
 			<ProductOptionsPopup
+				title={titleUK}
+				options={options}
 				isOpen={isProductPopupOpen}
 				closePopup={setIsProductPopupOpen}
 			/>
 
-			<div>
+			<div className='h-40'>
 				<Image
-					src='https://vilki-palki.od.ua/storage/img-cache/500_500_1760547314піцазлимоном.jpg.webp'
+					className='h-full object-cover'
+					src={imageUrl}
 					width={500}
 					height={500}
 					alt='Picture of the author'
@@ -52,13 +68,13 @@ export const ProductCard: React.FC<Props> = ({ className }) => {
 				<Title
 					className='font-semibold text-ellipsis whitespace-nowrap overflow-hidden'
 					size='xs'
-					text='Пiца з креветками'
+					text={titleUK}
 				/>
 
-				<p className='text-custom-gray text-sm mb-10'>Вага: 470г</p>
+				<p className='text-custom-gray text-sm mb-10'>Вага: {weight}г</p>
 
 				<div className='flex justify-between items-center'>
-					<span className='font-semibold'>250 UAH</span>
+					<span className='font-semibold'>{price} UAH</span>
 
 					{/* Counter */}
 					<div className='flex items-center gap-2 border border-gray-300 w-fit rounded-lg'>

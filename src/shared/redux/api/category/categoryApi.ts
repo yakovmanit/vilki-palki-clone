@@ -1,6 +1,6 @@
 import { Category } from '@prisma/client';
 
-import { api } from './api';
+import { api } from '../api';
 
 const categoryApi = api.injectEndpoints({
 	endpoints: (build) => ({

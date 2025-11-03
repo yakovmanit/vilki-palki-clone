@@ -1,11 +1,10 @@
-import { Category } from '@prisma/client';
-
-import { api } from './api';
+import { api } from '../api';
+import { ProductWithRelations } from '@shared/model/types';
 
 const productApi = api.injectEndpoints({
 	endpoints: (build) => ({
 		getProduct: build.query<
-			Category[],
+			ProductWithRelations[],
 			number
 		>({
 			query: (categoryId) => ({

@@ -63,9 +63,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 6 }], // Все + Роли + Гарячі роли
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }],
-			},
+			// Роли без опцій
 			ingredients: {
 				connect: [{ id: 1 }, { id: 2 }],
 			},
@@ -78,9 +76,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 6 }], // Все + Роли + Гарячі роли
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }],
-			},
+			// Роли без опцій
 			ingredients: {
 				connect: [{ id: 1 }],
 			},
@@ -94,9 +90,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 7 }], // Все + Роли + Холодні роли
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }],
-			},
+			// Роли без опцій
 			ingredients: {
 				connect: [{ id: 1 }, { id: 2 }],
 			},
@@ -109,9 +103,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 2 }, { id: 7 }], // Все + Роли + Холодні роли
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }],
-			},
+			// Роли без опцій
 			ingredients: {
 				connect: [{ id: 2 }],
 			},
@@ -125,9 +117,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 3 }, { id: 8 }], // Все + Суші + Нігірі
 			},
-			options: {
-				connect: [{ id: option1.id }],
-			},
+			// Суші без опцій
 			ingredients: {
 				connect: [{ id: 2 }],
 			},
@@ -140,9 +130,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 3 }, { id: 8 }], // Все + Суші + Нігірі
 			},
-			options: {
-				connect: [{ id: option1.id }],
-			},
+			// Суші без опцій
 			ingredients: {
 				connect: [{ id: 2 }],
 			},
@@ -156,9 +144,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
 			},
-			options: {
-				connect: [{ id: option1.id }],
-			},
+			// Суші без опцій
 			ingredients: {
 				connect: [{ id: 2 }],
 			},
@@ -171,9 +157,7 @@ async function up() {
 			category: {
 				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
 			},
-			options: {
-				connect: [{ id: option1.id }],
-			},
+			// Суші без опцій
 			ingredients: {
 				connect: [{ id: 2 }],
 			},
@@ -188,7 +172,7 @@ async function up() {
 				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
 			},
 			options: {
-				connect: [{ id: option3.id }],
+				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
 			},
 			ingredients: {
 				connect: [{ id: 6 }, { id: 7 }],
@@ -203,7 +187,7 @@ async function up() {
 				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
 			},
 			options: {
-				connect: [{ id: option3.id }],
+				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
 			},
 			ingredients: {
 				connect: [{ id: 6 }, { id: 7 }],
@@ -219,7 +203,7 @@ async function up() {
 				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
 			},
 			options: {
-				connect: [{ id: option3.id }],
+				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
 			},
 			ingredients: {
 				connect: [{ id: 7 }],
@@ -234,7 +218,7 @@ async function up() {
 				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
 			},
 			options: {
-				connect: [{ id: option3.id }],
+				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
 			},
 			ingredients: {
 				connect: [{ id: 5 }, { id: 7 }],

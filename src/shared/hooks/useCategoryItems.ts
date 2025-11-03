@@ -1,4 +1,4 @@
-import { useGetCategoryQuery } from '@shared/redux/api/categoryApi';
+import { useGetCategoryQuery } from '@shared/redux/api/category/categoryApi';
 
 export const useCategoryItems = () => {
 	const { data: allCategories, isLoading: isCategoriesLoading } =

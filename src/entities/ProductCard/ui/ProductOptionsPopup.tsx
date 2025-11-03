@@ -8,10 +8,13 @@ import { cn } from '@shared/lib';
 import { CloseIcon, Container, Title } from '@shared/ui';
 
 import { Options } from './Options';
+import { OptionWithIngredients } from '@shared/model/types';
 
 interface Props {
 	isOpen: boolean;
 	closePopup: (value: boolean) => void;
+	options: OptionWithIngredients[];
+	title: string;
 	className?: string;
 }
 
@@ -19,7 +22,11 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 	className,
 	isOpen,
 	closePopup,
+	title,
+	options,
 }) => {
+	console.log('options: ', options);
+
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handleClosePopup = () => {
@@ -42,7 +49,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 		>
 			<Container>
 				<div className='mt-4 flex justify-between gap-4'>
-					<Title text='Шаурма класична' className='font-medium' />
+					<Title text={title} className='font-medium' />
 
 					<button
 						className='rounded-full border border-gray-300 p-2 h-fit'
@@ -53,9 +60,16 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 				</div>
 
 				{/* Options */}
-				<Options title='Додатково' />
-				<Options title='Прибрати зі страви' />
-				<Options title='Зробити гостріше' />
+				{
+					options?.map(option =>
+						<Options
+							key={option.id}
+							title={option.titleUK}
+							ingredients={option.ingredients}
+						/>
+					)
+				}
+
 			</Container>
 		</div>
 	);

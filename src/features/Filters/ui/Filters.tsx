@@ -9,7 +9,6 @@ import { cn } from '@shared/lib';
 import { setCategoryId } from '@shared/redux/slices/categorySlice';
 import { RootState } from '@shared/redux/store';
 import { Button, Container, Title } from '@shared/ui';
-import { useGetProductQuery } from '@shared/redux/api/productApi';
 
 export const Filters: React.FC = () => {
 	const { isCategoriesLoading, parentCategories } = useCategoryItems();
