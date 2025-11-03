@@ -17,5 +17,5 @@ export const useCategoryItems = () => {
 		parentCategories,
 		childCategories,
 		allCategories,
-	}
-}
+	};
+};

@@ -4,11 +4,11 @@ import React from 'react';
 
 import Link from 'next/link';
 
+import { useCategoryItems } from '@shared/hooks';
 import { cn } from '@shared/lib';
 import { useGetCategoryQuery } from '@shared/redux/api/categoryApi';
 
 import { CategoryListSkeleton } from './CategoryListSkeleton';
-import { useCategoryItems } from '@shared/hooks';
 
 interface Props {
 	className?: string;
