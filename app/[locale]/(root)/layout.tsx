@@ -1,12 +1,12 @@
 import '../global.css';
 
-import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { hasLocale } from 'use-intl';
 
 import { routing } from '@shared/lib/i18n';
 import { Header } from '@widgets/header';
+import { ClientProviders, ServerProviders } from './providers';
 
 export const metadata = {
 	title: 'Next.js',
@@ -35,10 +35,12 @@ export default async function HomeLayout({
 
 	return (
 		<main>
-			<NextIntlClientProvider>
-				<Header />
-				{children}
-			</NextIntlClientProvider>
+			<ServerProviders>
+				<ClientProviders>
+					<Header />
+					{children}
+				</ClientProviders>
+			</ServerProviders>
 		</main>
 	);
 }

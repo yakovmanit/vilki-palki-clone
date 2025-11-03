@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { useTranslations } from 'next-intl';
@@ -9,15 +9,9 @@ import Link from 'next/link';
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, LogoIcon, Title } from '@shared/ui';
 
-interface Props {
-	isMenuDrawerOpen: boolean;
-	setIsMenuDrawerOpen: (isOpen: boolean) => void;
-}
+export const MenuDrawer: React.FC = () => {
+	const [isMenuDrawerOpen, setIsMenuDrawerOpen] = useState(false);
 
-export const MenuDrawer: React.FC<Props> = ({
-	isMenuDrawerOpen,
-	setIsMenuDrawerOpen,
-}) => {
 	const t = useTranslations('general');
 
 	const ref = useRef<HTMLDivElement>(null);
@@ -94,6 +88,7 @@ export const MenuDrawer: React.FC<Props> = ({
 						</p>
 
 						<Button variant='pink'>{t('signin')}</Button>
+						{/*<Button variant='pink'>Увійти</Button>*/}
 					</div>
 
 					<nav className='px-6 py-10'>

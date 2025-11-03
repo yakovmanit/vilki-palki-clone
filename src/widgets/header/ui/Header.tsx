@@ -1,19 +1,15 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 
 import { LocaleSwitcher } from '@features/LocaleSwitcher';
 import { cn } from '@shared/lib';
-import { CategoryDrawer, MenuDrawer } from '@shared/ui';
+import { MenuDrawer } from '@shared/ui';
+import { CategoryDrawer } from '@widgets/CategoryDrawer';
 
 interface Props {
 	className?: string;
 }
 
 export const Header: React.FC<Props> = ({ className }) => {
-	const [isMenuDrawerOpen, setIsMenuDrawerOpen] = useState(false);
-	const [isCatsDrawerOpen, setIsCatsDrawerOpen] = useState(false);
-
 	return (
 		<header
 			className={cn(
@@ -21,15 +17,9 @@ export const Header: React.FC<Props> = ({ className }) => {
 				className,
 			)}
 		>
-			<MenuDrawer
-				isMenuDrawerOpen={isMenuDrawerOpen}
-				setIsMenuDrawerOpen={setIsMenuDrawerOpen}
-			/>
+			<MenuDrawer />
 
-			<CategoryDrawer
-				isCatsDrawerOpen={isCatsDrawerOpen}
-				setIsCatsDrawerOpen={setIsCatsDrawerOpen}
-			/>
+			<CategoryDrawer />
 
 			<LocaleSwitcher />
 		</header>

@@ -1,21 +1,17 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import { cn } from '@shared/lib';
-import { CategoryList, MenuArrowIcon } from '@shared/ui';
+import { MenuArrowIcon } from '@shared/ui';
+import { CategoryList } from '@entities/CategoryList';
 
-interface Props {
-	isCatsDrawerOpen: boolean;
-	setIsCatsDrawerOpen: (isOpen: boolean) => void;
-}
 
-export const CategoryDrawer: React.FC<Props> = ({
-	isCatsDrawerOpen,
-	setIsCatsDrawerOpen,
-}) => {
+export const CategoryDrawer: React.FC = () => {
+	const [isCatsDrawerOpen, setIsCatsDrawerOpen] = useState(false);
+
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handleCatsDrawerOpen = () => {

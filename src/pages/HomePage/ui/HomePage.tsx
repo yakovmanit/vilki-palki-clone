@@ -5,7 +5,7 @@ import { ProductCardList } from '@entities/ProductCardList';
 import { CategorySection } from './CategorySection';
 import { HeroSection } from './HeroSection';
 
-const HomePage = () => {
+const HomePage = async () => {
 	return (
 		<main className='pb-100 pt-[54px]'>
 			<HeroSection className='pb-9' />

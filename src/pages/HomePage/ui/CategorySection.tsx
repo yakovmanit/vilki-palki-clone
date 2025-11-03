@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { CategoryList, Title } from '@shared/ui';
+import { CategoryList } from '@entities/CategoryList';
+import { Title } from '@shared/ui';
 
 interface Props {
 	className?: string;
