@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { LocaleSwitcher } from '@features/LocaleSwitcher';
+import { LocaleSwitcher } from '@features/locale-switcher';
 import { cn } from '@shared/lib';
 import { MenuDrawer } from '@shared/ui';
-import { CategoryDrawer } from '@widgets/CategoryDrawer';
+import { CategoryDrawer } from '@widgets/category-drawer';
 
 interface Props {
 	className?: string;

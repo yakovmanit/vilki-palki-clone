@@ -1,11 +1,11 @@
-import { Filters } from '@/features/Filters';
+import { Filters } from '@/features/filters';
 
-import { ProductCardList } from '@entities/ProductCardList';
+import { ProductCardList } from '@entities/product-card-list';
 
 import { CategorySection } from './CategorySection';
 import { HeroSection } from './HeroSection';
 
-const HomePage = async () => {
+const Home = async () => {
 	return (
 		<main className='pb-100 pt-[54px]'>
 			<HeroSection className='pb-9' />
@@ -19,4 +19,4 @@ const HomePage = async () => {
 	);
 };
 
-export default HomePage;
+export default Home;

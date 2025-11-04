@@ -3,7 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { ProductCard } from '@entities/ProductCard';
+import { ProductCard } from '@entities/product-card';
 import { cn } from '@shared/lib';
 import { useGetProductQuery } from '@shared/redux/api/product/productApi';
 import { RootState } from '@shared/redux/store';
