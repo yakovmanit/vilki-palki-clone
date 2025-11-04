@@ -8,6 +8,7 @@ import { routing } from '@shared/lib/i18n';
 import { Header } from '@widgets/header';
 
 import { ClientProviders, ServerProviders } from './providers';
+import { CartDrawer } from '@widgets/cart-drawer';
 
 export const metadata = {
 	title: 'Next.js',
@@ -40,6 +41,7 @@ export default async function HomeLayout({
 				<ClientProviders>
 					<Header />
 					{children}
+					<CartDrawer />
 				</ClientProviders>
 			</ServerProviders>
 		</main>

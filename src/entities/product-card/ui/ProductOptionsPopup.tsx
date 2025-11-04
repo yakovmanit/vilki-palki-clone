@@ -35,6 +35,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 	productPrice,
 	allOptionsIngredients,
 }) => {
+	// TODO(refactor): remove calculating logic to lib
 	const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
 
 	const handleSelectedIngredients = (id: number) => {
