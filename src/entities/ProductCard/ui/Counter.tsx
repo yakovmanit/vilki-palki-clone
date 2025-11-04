@@ -1,12 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-
-
 import { cn } from '@shared/lib';
-
-
-
-
 
 interface Props {
 	setCount: Dispatch<SetStateAction<number>>;

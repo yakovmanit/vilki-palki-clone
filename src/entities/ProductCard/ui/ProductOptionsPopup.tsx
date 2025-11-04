@@ -7,7 +7,7 @@ import { enableBodyScroll } from 'body-scroll-lock';
 import { cn } from '@shared/lib';
 import { Button, CloseIcon, Container, Title } from '@shared/ui';
 
-import { Options } from './Options';
+import { Option } from './Option';
 import { OptionWithIngredients } from '@shared/model/types';
 import { Counter } from './Counter';
 import { Ingredient } from '@prisma/client';
@@ -95,7 +95,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 				<Container>
 					<div className='pb-4'>
 						{options?.map(option => (
-							<Options
+							<Option
 								key={option.id}
 								title={option.titleUK}
 								ingredients={option.ingredients}

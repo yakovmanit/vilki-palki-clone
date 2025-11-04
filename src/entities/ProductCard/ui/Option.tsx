@@ -1,5 +1,5 @@
 import { Check } from 'lucide-react';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React from 'react';
 
 import Image from 'next/image';
 
@@ -15,7 +15,7 @@ interface Props {
 	className?: string;
 }
 
-export const Options: React.FC<Props> = ({ className, title, ingredients, handleSelectedIngredients, selectedIngredients }) => {
+export const Option: React.FC<Props> = ({ className, title, ingredients, handleSelectedIngredients, selectedIngredients }) => {
 	return (
 		<div className='mb-8'>
 			<Title
