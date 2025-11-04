@@ -9,8 +9,8 @@ export async function GET(req: NextRequest) {
 			where: {
 				category: {
 					some: {
-						id: Number(categoryId)
-					}
+						id: Number(categoryId),
+					},
 				},
 			},
 			include: {

@@ -2,16 +2,16 @@
 
 import React, { useRef, useState } from 'react';
 
+import { Ingredient } from '@prisma/client';
 import { disableBodyScroll } from 'body-scroll-lock';
 import Image from 'next/image';
 
 import { cn } from '@shared/lib';
+import { OptionWithIngredients } from '@shared/model/types';
 import { Title } from '@shared/ui';
 
-import { ProductOptionsPopup } from './ProductOptionsPopup';
-import { Ingredient } from '@prisma/client';
-import { OptionWithIngredients } from '@shared/model/types';
 import { Counter } from './Counter';
+import { ProductOptionsPopup } from './ProductOptionsPopup';
 
 interface Props {
 	className?: string;
@@ -26,12 +26,22 @@ interface Props {
 	options: OptionWithIngredients[];
 }
 
-export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, price, slug, weight, imageUrl, ingredients, options }) => {
+export const ProductCard: React.FC<Props> = ({
+	className,
+	titleUK,
+	titleEN,
+	price,
+	slug,
+	weight,
+	imageUrl,
+	ingredients,
+	options,
+}) => {
 	const [count, setCount] = useState(1);
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 
-	const allOptionsIngredients = options.flatMap(option => option.ingredients);
+	const allOptionsIngredients = options.flatMap((option) => option.ingredients);
 
 	const handleProductPopupOpen = () => {
 		if (!ref.current) return;
@@ -82,11 +92,7 @@ export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, pric
 					<span className='font-semibold'>{price} UAH</span>
 
 					{/* Counter */}
-					<Counter
-						count={count}
-						setCount={setCount}
-					/>
-
+					<Counter count={count} setCount={setCount} />
 				</div>
 			</div>
 

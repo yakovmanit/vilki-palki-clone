@@ -1,11 +1,11 @@
 import { Check } from 'lucide-react';
 import React from 'react';
 
+import { Ingredient } from '@prisma/client';
 import Image from 'next/image';
 
 import { cn } from '@shared/lib';
 import { Title } from '@shared/ui';
-import { Ingredient } from '@prisma/client';
 
 interface Props {
 	title?: string;
@@ -15,7 +15,13 @@ interface Props {
 	className?: string;
 }
 
-export const Option: React.FC<Props> = ({ className, title, ingredients, handleSelectedIngredients, selectedIngredients }) => {
+export const Option: React.FC<Props> = ({
+	className,
+	title,
+	ingredients,
+	handleSelectedIngredients,
+	selectedIngredients,
+}) => {
 	return (
 		<div className='mb-8'>
 			<Title
@@ -26,7 +32,10 @@ export const Option: React.FC<Props> = ({ className, title, ingredients, handleS
 
 			<ul className={cn('grid grid-cols-3 gap-2', className)}>
 				{ingredients.map((ingredient) => (
-					<li onClick={() => handleSelectedIngredients(ingredient.id)} key={ingredient.id}>
+					<li
+						onClick={() => handleSelectedIngredients(ingredient.id)}
+						key={ingredient.id}
+					>
 						<button
 							className={cn(
 								'bg-blue-50 p-3 rounded-lg border border-blue-100 relative',
@@ -53,7 +62,8 @@ export const Option: React.FC<Props> = ({ className, title, ingredients, handleS
 						</button>
 
 						<p className='mt-1.5 text-xs font-medium text-center'>
-							<span>{ingredient.price} UAH</span> / <span>{ingredient.weight} g</span>
+							<span>{ingredient.price} UAH</span> /{' '}
+							<span>{ingredient.weight} g</span>
 						</p>
 					</li>
 				))}

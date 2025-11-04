@@ -2,15 +2,15 @@
 
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 
+import { Ingredient } from '@prisma/client';
 import { enableBodyScroll } from 'body-scroll-lock';
 
 import { cn } from '@shared/lib';
+import { OptionWithIngredients } from '@shared/model/types';
 import { Button, CloseIcon, Container, Title } from '@shared/ui';
 
-import { Option } from './Option';
-import { OptionWithIngredients } from '@shared/model/types';
 import { Counter } from './Counter';
-import { Ingredient } from '@prisma/client';
+import { Option } from './Option';
 
 interface Props {
 	isOpen: boolean;
@@ -41,7 +41,9 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 		if (!selectedIngredients.includes(id)) {
 			setSelectedIngredients([...selectedIngredients, id]);
 		} else {
-			const filteredIngredients = selectedIngredients.filter((_id) => _id !== id);
+			const filteredIngredients = selectedIngredients.filter(
+				(_id) => _id !== id,
+			);
 
 			setSelectedIngredients(filteredIngredients);
 		}
@@ -55,13 +57,16 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 		enableBodyScroll(ref.current);
 	};
 
-	const selectedIngredientsPrice = allOptionsIngredients.reduce((acc, ingredient) => {
-		if (selectedIngredients.includes(ingredient.id)) {
-			return acc + ingredient.price;
-		} else {
-			return acc;
-		}
-	}, 0);
+	const selectedIngredientsPrice = allOptionsIngredients.reduce(
+		(acc, ingredient) => {
+			if (selectedIngredients.includes(ingredient.id)) {
+				return acc + ingredient.price;
+			} else {
+				return acc;
+			}
+		},
+		0,
+	);
 
 	const totalProductPrice = productPrice + selectedIngredientsPrice;
 
@@ -94,7 +99,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 			<div className='flex-1 overflow-y-auto overflow-x-hidden'>
 				<Container>
 					<div className='pb-4'>
-						{options?.map(option => (
+						{options?.map((option) => (
 							<Option
 								key={option.id}
 								title={option.titleUK}
@@ -112,16 +117,10 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 					<div className='flex items-center justify-between py-4'>
 						<p className='text-3xl font-semibold'>{totalProductPrice} UAH</p>
 
-						<Counter
-							count={count}
-							setCount={setCount}
-							isPopupCounter={true}
-						/>
+						<Counter count={count} setCount={setCount} isPopupCounter={true} />
 					</div>
 
-					<Button className='w-full text-lg'>
-						Додати в кошик
-					</Button>
+					<Button className='w-full text-lg'>Додати в кошик</Button>
 				</Container>
 			</div>
 		</div>

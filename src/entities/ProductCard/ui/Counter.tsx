@@ -9,8 +9,13 @@ interface Props {
 	className?: string;
 }
 
-export const Counter: React.FC<Props> = ({ className, setCount, count, isPopupCounter = false }) => {
-  return (
+export const Counter: React.FC<Props> = ({
+	className,
+	setCount,
+	count,
+	isPopupCounter = false,
+}) => {
+	return (
 		<div
 			className={cn(
 				'flex items-center gap-2 border border-gray-300 w-fit rounded-lg',
@@ -37,7 +42,11 @@ export const Counter: React.FC<Props> = ({ className, setCount, count, isPopupCo
 				</svg>
 			</button>
 
-			<span className={cn('text-xs font-semibold', { 'text-md': isPopupCounter })}>{count}</span>
+			<span
+				className={cn('text-xs font-semibold', { 'text-md': isPopupCounter })}
+			>
+				{count}
+			</span>
 
 			<button onClick={() => setCount((prev) => prev + 1)} className='p-1'>
 				<svg
