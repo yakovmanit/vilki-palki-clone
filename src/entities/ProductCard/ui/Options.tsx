@@ -1,5 +1,5 @@
 import { Check } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -9,23 +9,13 @@ import { Ingredient } from '@prisma/client';
 
 interface Props {
 	title?: string;
-	ingredients: Ingredient[]
+	ingredients: Ingredient[];
+	handleSelectedIngredients: (id: number) => void;
+	selectedIngredients: number[];
 	className?: string;
 }
 
-export const Options: React.FC<Props> = ({ className, title, ingredients }) => {
-	const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
-
-	const handleSelectedOptions = (id: number) => {
-		if (!selectedOptions.includes(id)) {
-			setSelectedOptions([...selectedOptions, id]);
-		} else {
-			const filteredOptions = selectedOptions.filter((_id) => _id !== id);
-
-			setSelectedOptions(filteredOptions);
-		}
-	};
-
+export const Options: React.FC<Props> = ({ className, title, ingredients, handleSelectedIngredients, selectedIngredients }) => {
 	return (
 		<div className='mb-8'>
 			<Title
@@ -36,16 +26,16 @@ export const Options: React.FC<Props> = ({ className, title, ingredients }) => {
 
 			<ul className={cn('grid grid-cols-3 gap-2', className)}>
 				{ingredients.map((ingredient) => (
-					<li onClick={() => handleSelectedOptions(ingredient.id)} key={ingredient.id}>
+					<li onClick={() => handleSelectedIngredients(ingredient.id)} key={ingredient.id}>
 						<button
 							className={cn(
 								'bg-blue-50 p-3 rounded-lg border border-blue-100 relative',
 								{
-									'border-blue-50': selectedOptions.includes(ingredient.id),
+									'border-blue-50': selectedIngredients.includes(ingredient.id),
 								},
 							)}
 						>
-							{selectedOptions.includes(ingredient.id) && (
+							{selectedIngredients.includes(ingredient.id) && (
 								<div className='p-1 rounded-full bg-custom-blue w-fit absolute -top-2 -right-2'>
 									<Check className='text-white w-4 h-4' strokeWidth='3' />
 								</div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 
 import { enableBodyScroll } from 'body-scroll-lock';
 
@@ -10,6 +10,7 @@ import { Button, CloseIcon, Container, Title } from '@shared/ui';
 import { Options } from './Options';
 import { OptionWithIngredients } from '@shared/model/types';
 import { Counter } from './Counter';
+import { Ingredient } from '@prisma/client';
 
 interface Props {
 	isOpen: boolean;
@@ -19,19 +20,32 @@ interface Props {
 	className?: string;
 	setCount: Dispatch<SetStateAction<number>>;
 	count: number;
+	productPrice: number;
+	allOptionsIngredients: Ingredient[];
 }
 
 export const ProductOptionsPopup: React.FC<Props> = ({
-																											 className,
-																											 isOpen,
-																											 closePopup,
-																											 title,
-																											 options,
-																											 setCount,
-																											 count,
-																										 }) => {
-	console.log('options: ', options);
+	className,
+	isOpen,
+	closePopup,
+	title,
+	options,
+	setCount,
+	count,
+	productPrice,
+	allOptionsIngredients,
+}) => {
+	const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
 
+	const handleSelectedIngredients = (id: number) => {
+		if (!selectedIngredients.includes(id)) {
+			setSelectedIngredients([...selectedIngredients, id]);
+		} else {
+			const filteredIngredients = selectedIngredients.filter((_id) => _id !== id);
+
+			setSelectedIngredients(filteredIngredients);
+		}
+	};
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handleClosePopup = () => {
@@ -40,6 +54,16 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 		closePopup(false);
 		enableBodyScroll(ref.current);
 	};
+
+	const selectedIngredientsPrice = allOptionsIngredients.reduce((acc, ingredient) => {
+		if (selectedIngredients.includes(ingredient.id)) {
+			return acc + ingredient.price;
+		} else {
+			return acc;
+		}
+	}, 0);
+
+	const totalProductPrice = productPrice + selectedIngredientsPrice;
 
 	return (
 		<div
@@ -75,6 +99,8 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 								key={option.id}
 								title={option.titleUK}
 								ingredients={option.ingredients}
+								handleSelectedIngredients={handleSelectedIngredients}
+								selectedIngredients={selectedIngredients}
 							/>
 						))}
 					</div>
@@ -84,7 +110,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 			<div className='border-t border-gray-200 pb-6'>
 				<Container>
 					<div className='flex items-center justify-between py-4'>
-						<p className='text-3xl font-semibold'>225 UAH</p>
+						<p className='text-3xl font-semibold'>{totalProductPrice} UAH</p>
 
 						<Counter
 							count={count}

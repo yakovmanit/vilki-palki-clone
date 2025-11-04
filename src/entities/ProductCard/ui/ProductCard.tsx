@@ -31,6 +31,8 @@ export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, pric
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 
+	const allOptionsIngredients = options.flatMap(option => option.ingredients);
+
 	const handleProductPopupOpen = () => {
 		if (!ref.current) return;
 
@@ -53,6 +55,8 @@ export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, pric
 				closePopup={setIsProductPopupOpen}
 				count={count}
 				setCount={setCount}
+				productPrice={price}
+				allOptionsIngredients={allOptionsIngredients}
 			/>
 
 			<div className='h-40'>
