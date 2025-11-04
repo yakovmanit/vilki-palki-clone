@@ -11,6 +11,7 @@ import { Title } from '@shared/ui';
 import { ProductOptionsPopup } from './ProductOptionsPopup';
 import { Ingredient } from '@prisma/client';
 import { OptionWithIngredients } from '@shared/model/types';
+import { Counter } from './Counter';
 
 interface Props {
 	className?: string;
@@ -26,8 +27,6 @@ interface Props {
 }
 
 export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, price, slug, weight, imageUrl, ingredients, options }) => {
-
-
 	const [count, setCount] = useState(1);
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
@@ -52,6 +51,8 @@ export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, pric
 				options={options}
 				isOpen={isProductPopupOpen}
 				closePopup={setIsProductPopupOpen}
+				count={count}
+				setCount={setCount}
 			/>
 
 			<div className='h-40'>
@@ -77,50 +78,11 @@ export const ProductCard: React.FC<Props> = ({ className, titleUK, titleEN, pric
 					<span className='font-semibold'>{price} UAH</span>
 
 					{/* Counter */}
-					<div className='flex items-center gap-2 border border-gray-300 w-fit rounded-lg'>
-						<button
-							onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : 1))}
-							className='p-1'
-						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								width='16'
-								height='16'
-								viewBox='0 0 24 24'
-								fill='none'
-								stroke='#99a1af'
-								strokeWidth='2'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								className='lucide lucide-minus-icon lucide-minus'
-							>
-								<path d='M5 12h14' />
-							</svg>
-						</button>
+					<Counter
+						count={count}
+						setCount={setCount}
+					/>
 
-						<span className='text-xs font-semibold'>{count}</span>
-
-						<button
-							onClick={() => setCount((prev) => prev + 1)}
-							className='p-1'
-						>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								width='16'
-								height='16'
-								viewBox='0 0 24 24'
-								fill='none'
-								stroke='#99a1af'
-								strokeWidth='2'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								className='lucide lucide-plus-icon lucide-plus'
-							>
-								<path d='M5 12h14' />
-								<path d='M12 5v14' />
-							</svg>
-						</button>
-					</div>
 				</div>
 			</div>
 
