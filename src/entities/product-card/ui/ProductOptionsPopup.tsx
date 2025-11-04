@@ -75,7 +75,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 		<div
 			ref={ref}
 			className={cn(
-				'fixed transition ease-out duration-500 w-full h-full top-0 left-0 z-10 translate-y-0 bg-white flex flex-col',
+				'fixed transition ease-out duration-500 w-full h-full top-0 left-0 z-40 translate-y-0 bg-white flex flex-col',
 				className,
 				{
 					'translate-y-full': !isOpen,
