@@ -21,6 +21,8 @@ model Product {
   options Option[]
 
   category Category[]
+
+  cartItem CartItem[]
 }
 
 model Ingredient {
@@ -59,4 +61,42 @@ model Category {
   parentCategoryId Int?
   parentCategory   Category?  @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
   category         Category[] @relation("CategoryToCategory")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  name     String
+  phone    String
+  role     UserRole @default(USER)
+
+  token String
+
+  cart Cart?
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int?     @unique
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id       Int @id @default(autoincrement())
+  quantity Int
+
+  cartId Int
+  cart   Cart @relation(fields: [cartId], references: [id])
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }
