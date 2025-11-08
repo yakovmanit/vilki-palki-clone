@@ -79,8 +79,16 @@ export const CartDrawer: React.FC = () => {
 					<div className='flex flex-col gap-3'>
 						{/* Cart Item */}
 						<CartDrawerItem
+							categoryName='Напої'
+							productName='Coca-Cola'
+							price={30}
+							weight={500}
 							counterValue={counterValue}
 							setCounterValue={setCounterValue}
+							ingredients={[
+								{ name: 'Лід', price: 5 },
+								{ name: 'Лимон', price: 7 },
+							]}
 						/>
 					</div>
 				</Container>
