@@ -36,6 +36,8 @@ model Ingredient {
   product Product[]
 
   option Option[]
+
+  cartItem CartItem[]
 }
 
 model Option {
@@ -65,24 +67,27 @@ model Category {
 
 model User {
   id       Int      @id @default(autoincrement())
-  email    String   @unique
-  password String
-  name     String
-  phone    String
+  email    String?  @unique
+  password String?
+  name     String?
+  phone    String?
   role     UserRole @default(USER)
 
-  token String
+  token String @unique
 
   cart Cart?
 }
 
 model Cart {
-  id        Int      @id @default(autoincrement())
-  userId    Int?     @unique
-  user      User?    @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
+  id          Int    @id @default(autoincrement())
+  userId      Int?   @unique
+  user        User?  @relation(fields: [userId], references: [id])
+  totalAmount Int    @default(0)
+  token       String
 
   cartItems CartItem[]
+
+  createdAt DateTime @default(now())
 }
 
 model CartItem {
@@ -94,6 +99,8 @@ model CartItem {
 
   productId Int
   product   Product @relation(fields: [productId], references: [id])
+
+  ingredients Ingredient[]
 }
 
 enum UserRole {

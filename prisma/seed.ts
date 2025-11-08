@@ -1,5 +1,7 @@
 import { categories, ingredients, products } from './constants';
 import { prisma } from './prisma-client';
+import { UserRole } from '@prisma/client';
+
 
 async function up() {
 	// 1. Create Ingredients
@@ -244,9 +246,70 @@ async function up() {
 			},
 		},
 	});
+
+	// 6. Create Users
+	await prisma.user.createMany({
+		data: [
+			{
+				id: 1,
+				email: 'test@gmail1.com',
+				password: 'hashedpassword',
+				token: '11111',
+				name: 'Alex',
+				phone: '12345',
+			},
+			{
+				id: 2,
+				email: 'test@gmail2.com',
+				password: 'hashedpassword',
+				token: '22222',
+				role: UserRole.ADMIN,
+			},
+		],
+	});
+
+	// 7. Create Cart
+	await prisma.cart.createMany({
+		data: [
+			{
+				id: 1,
+				userId: 1,
+				totalAmount: 100,
+				token: '11111',
+			},
+			{
+				id: 2,
+				userId: 2,
+				totalAmount: 200,
+				token: '22222',
+			}
+		]
+	});
+
+	// 8. Create Cart Items
+	await prisma.cartItem.create({
+		data: {
+			productId: 9,
+			cartId: 1,
+			quantity: 2,
+			ingredients: { connect: [{ id: 3 }, { id: 4 }] },
+		},
+	});
+
+	await prisma.cartItem.create({
+		data: {
+			productId: 8,
+			cartId: 2,
+			quantity: 1,
+			ingredients: { connect: [{ id: 5 }, { id: 6 }] },
+		},
+	});
 }
 
 async function down() {
+	await prisma.user.deleteMany({});
+	await prisma.cartItem.deleteMany({});
+	await prisma.cart.deleteMany({});
 	await prisma.product.deleteMany({});
 	await prisma.option.deleteMany({});
 	await prisma.category.deleteMany({});
