@@ -8,8 +8,11 @@ import { cn } from '@shared/lib';
 import { ChevronUp, CircleX, X } from 'lucide-react';
 import { Button, Container, Title } from '@shared/ui';
 import { CartDrawerItem } from './CartDrawerItem';
+import { useCart } from '@shared/hooks';
 
 export const CartDrawer: React.FC = () => {
+  const { cartItems, isLoading, cartTotalAmount } = useCart();
+
 	const [counterValue, setCounterValue] = useState(1);
 
 	const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
@@ -47,7 +50,7 @@ export const CartDrawer: React.FC = () => {
 				<div className='flex justify-between items-center gap-3'>
 					<div className='text-right'>
 						<p className='text-xs text-custom-gray'>До сплати</p>
-						<p className='text-xl font-semibold'>245 UAH</p>
+						<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
 					</div>
 
 					<Button>
@@ -77,19 +80,27 @@ export const CartDrawer: React.FC = () => {
 
 					{/* Cart Drawer Body */}
 					<div className='flex flex-col gap-3'>
-						{/* Cart Item */}
-						<CartDrawerItem
-							categoryName='Напої'
-							productName='Coca-Cola'
-							price={30}
-							weight={500}
-							counterValue={counterValue}
-							setCounterValue={setCounterValue}
-							ingredients={[
-								{ name: 'Лід', price: 5 },
-								{ name: 'Лимон', price: 7 },
-							]}
-						/>
+						{/* Cart Items */}
+						{/* TODO: add cart item skeleton */}
+						{
+							isLoading ? (
+								<p>Loading...</p>
+							) : (
+								cartItems?.map((item) => (
+									<CartDrawerItem
+										key={item.id}
+										categoryName={item.categoryName}
+										productName={item.titleUK}
+										price={item.price}
+										weight={item.weight}
+										counterValue={counterValue}
+										setCounterValue={setCounterValue}
+										imageUrl={item.imageUrl}
+										ingredients={item.ingredients}
+									/>
+								))
+							)
+						}
 					</div>
 				</Container>
 			</div>

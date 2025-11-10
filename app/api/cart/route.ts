@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 export async function GET(req: NextRequest) {
 	try {
-		const cookieStore = await cookies()
+		const cookieStore = await cookies();
 		const userToken = cookieStore.get('userToken')?.value;
 
 		if (!userToken) {
@@ -18,7 +18,16 @@ export async function GET(req: NextRequest) {
 			include: {
 				cartItems: {
 					include: {
-						product: true,
+						product: {
+							include: {
+								category: {
+									select: {
+										titleUK: true,
+										titleEN: true,
+									},
+								},
+							}
+						},
 						ingredients: true,
 					}
 				},

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { ProductCard } from '@entities/product-card';
 import { cn } from '@shared/lib';
-import { useGetProductQuery } from '@shared/redux/api/product/productApi';
+import { useGetProductQuery } from '@shared/redux';
 import { RootState } from '@shared/redux/store';
 import { Container } from '@shared/ui';
 

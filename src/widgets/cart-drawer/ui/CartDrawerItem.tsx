@@ -2,11 +2,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { X } from 'lucide-react';
 import { Title } from '@shared/ui';
 import { Counter } from '@entities/product-card/ui/Counter';
-
-interface CartIngredient {
-	name: string;
-	price: number;
-}
+import Image from 'next/image';
+import { CartIngredient } from '../model/types';
 
 interface Props {
 	categoryName: string;
@@ -15,10 +12,11 @@ interface Props {
 	weight: number;
 	ingredients?: CartIngredient[];
 	counterValue: number;
+	imageUrl?: string;
 	setCounterValue: Dispatch<SetStateAction<number>>;
 }
 
-export const CartDrawerItem: React.FC<Props> = ({ counterValue, setCounterValue, categoryName, productName, price, weight, ingredients }) => {
+export const CartDrawerItem: React.FC<Props> = ({ counterValue, setCounterValue, categoryName, productName, price, weight, ingredients, imageUrl }) => {
   return (
 		<div className='p-2 border-[2px] border-gray-200 rounded-md relative'>
 			<div className='flex items-center gap-3 '>
@@ -27,7 +25,13 @@ export const CartDrawerItem: React.FC<Props> = ({ counterValue, setCounterValue,
 				</button>
 
 				<div className='shrink-0 rounded-md overflow-hidden h-20 w-20'>
-					<img src='https://vilki-palki.od.ua/storage/img-cache/500_500_17605291076.jpg.webp' alt='auto' />
+					<Image
+						className='object-cover w-full h-full'
+						src={imageUrl || '/assets/Image-not-found.png'}
+						alt={productName}
+						width={100}
+						height={100}
+					/>
 				</div>
 
 				<div className='w-full'>
@@ -47,9 +51,9 @@ export const CartDrawerItem: React.FC<Props> = ({ counterValue, setCounterValue,
 			<div className='flex flex-col'>
 				{
 					ingredients?.map(ingredient => (
-						<div key={ingredient.name} className='flex items-center justify-between gap-4 border-t border-gray-100 p-2 -mx-2 text-sm text-gray-600 last:pb-0 first:mt-2'>
+						<div key={ingredient.titleUK} className='flex items-center justify-between gap-4 border-t border-gray-100 p-2 -mx-2 text-sm text-gray-600 last:pb-0 first:mt-2'>
 							<p>
-								+ {ingredient.name}
+								+ {ingredient.titleUK}
 							</p>
 							<p>
 								+ {ingredient.price} UAH
