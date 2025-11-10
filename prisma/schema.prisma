@@ -23,6 +23,9 @@ model Product {
   category Category[]
 
   cartItem CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Ingredient {
@@ -38,6 +41,9 @@ model Ingredient {
   option Option[]
 
   cartItem CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Option {
@@ -49,6 +55,9 @@ model Option {
   ingredients Ingredient[]
 
   product Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -63,6 +72,9 @@ model Category {
   parentCategoryId Int?
   parentCategory   Category?  @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
   category         Category[] @relation("CategoryToCategory")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
@@ -76,6 +88,9 @@ model User {
   token String @unique
 
   cart Cart?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Cart {
@@ -88,6 +103,7 @@ model Cart {
   cartItems CartItem[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model CartItem {
@@ -101,6 +117,9 @@ model CartItem {
   product   Product @relation(fields: [productId], references: [id])
 
   ingredients Ingredient[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum UserRole {
