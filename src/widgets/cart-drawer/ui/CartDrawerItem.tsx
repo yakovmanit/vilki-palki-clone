@@ -3,14 +3,14 @@ import { X } from 'lucide-react';
 import { Title } from '@shared/ui';
 import { Counter } from '@entities/product-card/ui/Counter';
 import Image from 'next/image';
-import { CartIngredient } from '../model/types';
+import { Ingredient } from '@prisma/client';
 
 interface Props {
 	categoryName: string;
 	productName: string;
 	price: number;
 	weight: number;
-	ingredients?: CartIngredient[];
+	ingredients?: Ingredient[];
 	counterValue: number;
 	imageUrl?: string;
 	setCounterValue: Dispatch<SetStateAction<number>>;
