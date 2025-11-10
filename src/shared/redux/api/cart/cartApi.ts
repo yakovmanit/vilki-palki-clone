@@ -16,6 +16,13 @@ const cartApi = api.injectEndpoints({
 				body: { quantity },
 			}),
 		}),
+
+		deleteCartItem: build.mutation<void, { id: number }>({
+			query: ({ id }) => ({
+				url: `cart/${id}`,
+				method: 'DELETE',
+			}),
+		}),
 	}),
 
 	overrideExisting: false,
@@ -27,10 +34,14 @@ const cartApi = api.injectEndpoints({
 			getCart: {
 				providesTags: ['Cart'],
 			},
+
 			updateCartItem: {
 				invalidatesTags: ['Cart'],
 			},
+			deleteCartItem: {
+				invalidatesTags: ['Cart'],
+			}
 		},
 	});
 
-export const { useGetCartQuery, useUpdateCartItemMutation } = cartApi;
+export const { useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation } = cartApi;

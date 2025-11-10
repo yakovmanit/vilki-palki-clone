@@ -1,47 +1,20 @@
-'use client';
-
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import { cn } from '@shared/lib';
-import { useUpdateCartItemMutation } from '@shared/redux';
 
 interface Props {
-	setCount: Dispatch<SetStateAction<number>>;
 	count: number;
 	isPopupCounter?: boolean;
-	itemId?: number;
+	handleUpdateCartItem: (type: 'plus' | 'minus') => void;
 	className?: string;
 }
 
 export const Counter: React.FC<Props> = ({
 	className,
-	setCount,
 	count,
 	isPopupCounter = false,
-	itemId,
+	handleUpdateCartItem,
 }) => {
-	const [updateCartItem] = useUpdateCartItemMutation();
-
-	const handleUpdateCartItem = async (type: 'minus' | 'plus') => {
-		if (!itemId) return;
-
-		if (type === 'minus') {
-			setCount((prev) => (prev > 1 ? prev - 1 : 1))
-
-			await updateCartItem({
-				id: itemId,
-				quantity: count - 1
-			});
-		} else {
-			setCount((prev) => prev + 1)
-
-			await updateCartItem({
-				id: itemId,
-				quantity: count + 1
-			});
-		}
-	}
-
 	return (
 		<div
 			className={cn(
