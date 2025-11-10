@@ -20,7 +20,7 @@ export const ingredients = [
 		id: 3,
 		titleUK: 'Томатний Чилі',
 		titleEN: 'Tomato Chili',
-		price: 0,
+		price: 30,
 		imageUrl:
 			'https://vilki-palki.od.ua/storage/img-cache/1617355497Sous-Tomatnyi-Chili.png.webp',
 		weight: 35,
@@ -47,7 +47,7 @@ export const ingredients = [
 		id: 6,
 		titleUK: 'Мисливські ковбаски',
 		titleEN: 'Hunting sausages',
-		price: 0,
+		price: 50,
 		imageUrl:
 			'https://vilki-palki.od.ua/storage/img-cache/16088995281608899528Ohotnichi-kolbaski.png.webp',
 		weight: 0,

@@ -298,6 +298,15 @@ async function up() {
 
 	await prisma.cartItem.create({
 		data: {
+			productId: 7,
+			cartId: 1,
+			quantity: 1,
+			ingredients: { connect: [{ id: 3 }, { id: 6 }] },
+		},
+	});
+
+	await prisma.cartItem.create({
+		data: {
 			productId: 8,
 			cartId: 2,
 			quantity: 1,
