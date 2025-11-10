@@ -5,7 +5,8 @@ export const useCart = () => {
 
 	const cartItems = data?.cartItems.map(cartItem => {
 		return {
-			id: cartItem.product.id,
+			cartItemId: cartItem.id,
+			productId: cartItem.product.id,
 			titleEN: cartItem.product.titleEN,
 			titleUK: cartItem.product.titleUK,
 			price: cartItem.product.price,
@@ -13,6 +14,7 @@ export const useCart = () => {
 			categoryName: cartItem.product.category[1].titleUK,
 			weight: cartItem.product.weight,
 			imageUrl: cartItem.product.imageUrl,
+			quantity: cartItem.quantity,
 		}
 	})
 

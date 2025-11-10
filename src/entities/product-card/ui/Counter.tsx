@@ -1,11 +1,15 @@
+'use client';
+
 import React, { Dispatch, SetStateAction } from 'react';
 
 import { cn } from '@shared/lib';
+import { useUpdateCartItemMutation } from '@shared/redux';
 
 interface Props {
 	setCount: Dispatch<SetStateAction<number>>;
 	count: number;
 	isPopupCounter?: boolean;
+	itemId?: number;
 	className?: string;
 }
 
@@ -14,7 +18,30 @@ export const Counter: React.FC<Props> = ({
 	setCount,
 	count,
 	isPopupCounter = false,
+	itemId,
 }) => {
+	const [updateCartItem] = useUpdateCartItemMutation();
+
+	const handleUpdateCartItem = async (type: 'minus' | 'plus') => {
+		if (!itemId) return;
+
+		if (type === 'minus') {
+			setCount((prev) => (prev > 1 ? prev - 1 : 1))
+
+			await updateCartItem({
+				id: itemId,
+				quantity: count - 1
+			});
+		} else {
+			setCount((prev) => prev + 1)
+
+			await updateCartItem({
+				id: itemId,
+				quantity: count + 1
+			});
+		}
+	}
+
 	return (
 		<div
 			className={cn(
@@ -23,7 +50,7 @@ export const Counter: React.FC<Props> = ({
 			)}
 		>
 			<button
-				onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : 1))}
+				onClick={() => handleUpdateCartItem('minus')}
 				className='p-1'
 			>
 				<svg
@@ -48,7 +75,7 @@ export const Counter: React.FC<Props> = ({
 				{count}
 			</span>
 
-			<button onClick={() => setCount((prev) => prev + 1)} className='p-1'>
+			<button onClick={() => handleUpdateCartItem('plus')} className='p-1'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					width={isPopupCounter ? 24 : 16}

@@ -5,15 +5,13 @@ import React, { useRef, useState } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 import { cn } from '@shared/lib';
-import { ChevronUp, CircleX, X } from 'lucide-react';
+import { ChevronUp, CircleX } from 'lucide-react';
 import { Button, Container, Title } from '@shared/ui';
 import { CartDrawerItem } from './CartDrawerItem';
 import { useCart } from '@shared/hooks';
 
 export const CartDrawer: React.FC = () => {
   const { cartItems, isLoading, cartTotalAmount } = useCart();
-
-	const [counterValue, setCounterValue] = useState(1);
 
 	const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
@@ -88,15 +86,15 @@ export const CartDrawer: React.FC = () => {
 							) : (
 								cartItems?.map((item) => (
 									<CartDrawerItem
-										key={item.id}
+										key={item.cartItemId}
+							      cartItemId={item.cartItemId}
 										categoryName={item.categoryName}
 										productName={item.titleUK}
 										price={item.price}
 										weight={item.weight}
-										counterValue={counterValue}
-										setCounterValue={setCounterValue}
 										imageUrl={item.imageUrl}
 										ingredients={item.ingredients}
+										quantity={item.quantity}
 									/>
 								))
 							)

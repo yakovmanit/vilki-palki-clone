@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@prisma/prisma-client';
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+	req: NextRequest,
+	{ params }: { params: Promise<{ id: string }> },
+) {
 	try {
 		const cookieStore = await cookies();
 		const userToken = cookieStore.get('userToken')?.value;
 
-		const { id } = params;
+		const { id } = await params;
 
 		if (!userToken) {
 			return NextResponse.json({ cartItems: [], totalAmount: 0 }, { status: 400 });
