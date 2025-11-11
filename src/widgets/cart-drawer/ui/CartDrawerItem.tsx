@@ -36,12 +36,18 @@ export const CartDrawerItem: React.FC<Props> = ({
 	const [updateCartItem] = useUpdateCartItemMutation();
 	const [deleteCartItem] = useDeleteCartItemMutation();
 
-	const handleUpdateCartItem = async (type: 'minus' | 'plus') => {
+	const handleDeleteCartItem = async () => {
+		if (!cartItemId) return;
+
+		await deleteCartItem({ id: cartItemId });
+	}
+
+	const handleUpdateOrDeleteCartItem = async (type: 'minus' | 'plus') => {
 		if (!cartItemId) return;
 
 		if (type === 'minus') {
 			if (counterValue - 1 === 0) {
-				await deleteCartItem({ id: cartItemId });
+				await handleDeleteCartItem();
 				return;
 			}
 
@@ -64,7 +70,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 	return (
 		<div className='p-2 border-[2px] border-gray-200 rounded-md relative'>
 			<div className='flex items-center gap-3 '>
-				<button className='absolute right-0 top-1 w-5 h-5 text-custom-gray'>
+				<button onClick={handleDeleteCartItem} className='absolute right-0 top-1 w-5 h-5 text-custom-gray'>
 					<X className='w-4 h-4' />
 				</button>
 
@@ -89,7 +95,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 						<Counter
 							className='ml-auto'
 							count={counterValue}
-							handleUpdateCartItem={handleUpdateCartItem}
+							handleUpdateCartItem={handleUpdateOrDeleteCartItem}
 						/>
 					</div>
 				</div>
