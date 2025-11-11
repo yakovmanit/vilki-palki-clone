@@ -35,10 +35,11 @@ export const Option: React.FC<Props> = ({
 					<li
 						onClick={() => handleSelectedIngredients(ingredient.id)}
 						key={ingredient.id}
+						className='flex flex-col justify-between'
 					>
 						<button
 							className={cn(
-								'bg-blue-50 p-3 rounded-lg border border-blue-100 relative',
+								'h-full bg-blue-50 p-3 rounded-lg border border-blue-100 relative flex flex-col',
 								{
 									'border-blue-50': selectedIngredients.includes(ingredient.id),
 								},
@@ -55,7 +56,7 @@ export const Option: React.FC<Props> = ({
 								alt={ingredient.titleUK}
 								width={500}
 								height={500}
-								className='mb-1'
+								className='mb-1 aspect-[5.5/4] object-cover'
 							/>
 
 							<p className='text-xs text-custom-gray'>{ingredient.titleUK}</p>
