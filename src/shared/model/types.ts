@@ -7,13 +7,15 @@ export type ProductWithRelations = Product & {
 	ingredients: Ingredient[];
 };
 
-type cartProduct =  ProductWithRelations & {
+type cartProduct = ProductWithRelations & {
 	category: {
 		titleUK: string;
 		titleEN: string;
 	}[];
-}
+};
 
-export type FullCartItem = CartItem & { ingredients: Ingredient[] } & { product: cartProduct };
+export type FullCartItem = CartItem & { ingredients: Ingredient[] } & {
+	product: cartProduct;
+};
 
 export type ExtendedCart = Cart & { cartItems: FullCartItem[] };

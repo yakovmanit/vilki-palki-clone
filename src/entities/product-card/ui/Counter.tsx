@@ -22,10 +22,7 @@ export const Counter: React.FC<Props> = ({
 				className,
 			)}
 		>
-			<button
-				onClick={() => handleUpdateCartItem('minus')}
-				className='p-1'
-			>
+			<button onClick={() => handleUpdateCartItem('minus')} className='p-1'>
 				<svg
 					xmlns='http://www.w3.org/2000/svg'
 					width={isPopupCounter ? 24 : 16}

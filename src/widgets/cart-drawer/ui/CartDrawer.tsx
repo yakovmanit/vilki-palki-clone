@@ -1,17 +1,18 @@
 'use client';
 
+import { ChevronUp, CircleX } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
-import { cn } from '@shared/lib';
-import { ChevronUp, CircleX } from 'lucide-react';
-import { Button, Container, Title } from '@shared/ui';
-import { CartDrawerItem } from './CartDrawerItem';
 import { useCart } from '@shared/hooks';
+import { cn } from '@shared/lib';
+import { Button, Container, Title } from '@shared/ui';
+
+import { CartDrawerItem } from './CartDrawerItem';
 
 export const CartDrawer: React.FC = () => {
-  const { cartItems, isLoading, cartTotalAmount } = useCart();
+	const { cartItems, isLoading, cartTotalAmount } = useCart();
 
 	const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
@@ -35,13 +36,20 @@ export const CartDrawer: React.FC = () => {
 		<div>
 			<div className='flex justify-between items-center fixed left-0 bottom-0 w-full bg-primary text-white p-3 z-30'>
 				<div
-					onClick={() => isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()}
+					onClick={() =>
+						isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()
+					}
 					ref={ref}
 				>
 					<button>
-						<ChevronUp className={cn('w-8 h-8 text-custom-gray transition duration-300 ease-in-out', {
-							'transform rotate-180': !isCartDrawerOpen,
-						})} />
+						<ChevronUp
+							className={cn(
+								'w-8 h-8 text-custom-gray transition duration-300 ease-in-out',
+								{
+									'transform rotate-180': !isCartDrawerOpen,
+								},
+							)}
+						/>
 					</button>
 				</div>
 
@@ -51,9 +59,7 @@ export const CartDrawer: React.FC = () => {
 						<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
 					</div>
 
-					<Button>
-						Оформлення
-					</Button>
+					<Button>Оформлення</Button>
 				</div>
 			</div>
 
@@ -80,25 +86,23 @@ export const CartDrawer: React.FC = () => {
 					<div className='flex flex-col gap-3'>
 						{/* Cart Items */}
 						{/* TODO: add cart item skeleton */}
-						{
-							isLoading ? (
-								<p>Loading...</p>
-							) : (
-								cartItems?.map((item) => (
-									<CartDrawerItem
-										key={item.cartItemId}
-							      cartItemId={item.cartItemId}
-										categoryName={item.categoryName}
-										productName={item.titleUK}
-										price={item.price}
-										weight={item.weight}
-										imageUrl={item.imageUrl}
-										ingredients={item.ingredients}
-										quantity={item.quantity}
-									/>
-								))
-							)
-						}
+						{isLoading ? (
+							<p>Loading...</p>
+						) : (
+							cartItems?.map((item) => (
+								<CartDrawerItem
+									key={item.cartItemId}
+									cartItemId={item.cartItemId}
+									categoryName={item.categoryName}
+									productName={item.titleUK}
+									price={item.price}
+									weight={item.weight}
+									imageUrl={item.imageUrl}
+									ingredients={item.ingredients}
+									quantity={item.quantity}
+								/>
+							))
+						)}
 					</div>
 				</Container>
 			</div>

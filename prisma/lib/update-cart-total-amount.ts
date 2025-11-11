@@ -9,12 +9,15 @@ export const updateCartTotalAmount = async (userToken: string) => {
 		},
 		include: {
 			product: true,
-			ingredients: true
-		}
+			ingredients: true,
+		},
 	});
 
 	const totalAmount = cartItems.reduce((total, item) => {
-		const ingredientsTotal = item.ingredients.reduce((ingTotal, ingredient) => ingTotal + ingredient.price, 0);
+		const ingredientsTotal = item.ingredients.reduce(
+			(ingTotal, ingredient) => ingTotal + ingredient.price,
+			0,
+		);
 		const itemTotal = (item.product.price + ingredientsTotal) * item.quantity;
 		return total + itemTotal;
 	}, 0);
@@ -25,6 +28,6 @@ export const updateCartTotalAmount = async (userToken: string) => {
 		},
 		data: {
 			totalAmount: totalAmount,
-		}
+		},
 	});
-}
+};

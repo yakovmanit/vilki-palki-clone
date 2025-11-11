@@ -1,7 +1,7 @@
-import { categories, ingredients, products } from './constants';
-import { prisma } from './prisma-client';
 import { UserRole } from '@prisma/client';
 
+import { categories, ingredients, products } from './constants';
+import { prisma } from './prisma-client';
 
 async function up() {
 	// 1. Create Ingredients
@@ -282,8 +282,8 @@ async function up() {
 				userId: 2,
 				totalAmount: 200,
 				token: '22222',
-			}
-		]
+			},
+		],
 	});
 
 	// 8. Create Cart Items

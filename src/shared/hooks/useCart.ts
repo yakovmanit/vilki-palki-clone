@@ -3,7 +3,7 @@ import { useGetCartQuery } from '@shared/redux';
 export const useCart = () => {
 	const { data, isLoading } = useGetCartQuery();
 
-	const cartItems = data?.cartItems.map(cartItem => {
+	const cartItems = data?.cartItems.map((cartItem) => {
 		return {
 			cartItemId: cartItem.id,
 			productId: cartItem.product.id,
@@ -15,12 +15,12 @@ export const useCart = () => {
 			weight: cartItem.product.weight,
 			imageUrl: cartItem.product.imageUrl,
 			quantity: cartItem.quantity,
-		}
-	})
+		};
+	});
 
 	return {
 		cartItems,
 		isLoading,
 		cartTotalAmount: data?.totalAmount || 0,
 	};
-}
+};

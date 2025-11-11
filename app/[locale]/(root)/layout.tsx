@@ -5,10 +5,10 @@ import { notFound } from 'next/navigation';
 import { hasLocale } from 'use-intl';
 
 import { routing } from '@shared/lib/i18n';
+import { CartDrawer } from '@widgets/cart-drawer';
 import { Header } from '@widgets/header';
 
 import { ClientProviders, ServerProviders } from './providers';
-import { CartDrawer } from '@widgets/cart-drawer';
 
 export const metadata = {
 	title: 'Next.js',

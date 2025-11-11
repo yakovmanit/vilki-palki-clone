@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-import { prisma } from '@prisma/prisma-client';
 import { updateCartTotalAmount } from '@prisma/lib/update-cart-total-amount';
+import { prisma } from '@prisma/prisma-client';
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function PATCH(
 	req: NextRequest,
@@ -14,7 +14,10 @@ export async function PATCH(
 		const { id } = await params;
 
 		if (!userToken) {
-			return NextResponse.json({ cartItems: [], totalAmount: 0 }, { status: 400 });
+			return NextResponse.json(
+				{ cartItems: [], totalAmount: 0 },
+				{ status: 400 },
+			);
 		}
 
 		const { quantity } = await req.json();
@@ -29,7 +32,6 @@ export async function PATCH(
 		await updateCartTotalAmount(userToken);
 
 		return NextResponse.json(updatedCartItem);
-
 	} catch (err) {
 		console.log('[CART_ITEM_PATCH] Server error', err);
 		return NextResponse.json(
@@ -38,7 +40,6 @@ export async function PATCH(
 		);
 	}
 }
-
 
 export async function DELETE(
 	req: NextRequest,
@@ -49,7 +50,10 @@ export async function DELETE(
 		const userToken = cookieStore.get('userToken')?.value;
 
 		if (!userToken) {
-			return NextResponse.json({ cartItems: [], totalAmount: 0 }, { status: 400 });
+			return NextResponse.json(
+				{ cartItems: [], totalAmount: 0 },
+				{ status: 400 },
+			);
 		}
 
 		const { id } = await params;
@@ -63,7 +67,6 @@ export async function DELETE(
 		await updateCartTotalAmount(userToken);
 
 		return NextResponse.json({ message: 'Cart item deleted successfully' });
-
 	} catch (err) {
 		console.log('[CART_ITEM_DELETE] Server error', err);
 		return NextResponse.json(

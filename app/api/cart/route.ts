@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@prisma/prisma-client';
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
@@ -8,12 +8,15 @@ export async function GET(req: NextRequest) {
 		const userToken = cookieStore.get('userToken')?.value;
 
 		if (!userToken) {
-			return NextResponse.json({ cartItems: [], totalAmount: 0 }, { status: 400 });
+			return NextResponse.json(
+				{ cartItems: [], totalAmount: 0 },
+				{ status: 400 },
+			);
 		}
 
 		const cart = await prisma.cart.findFirst({
 			where: {
-				token: userToken
+				token: userToken,
 			},
 			include: {
 				cartItems: {
@@ -26,16 +29,15 @@ export async function GET(req: NextRequest) {
 										titleEN: true,
 									},
 								},
-							}
+							},
 						},
 						ingredients: true,
-					}
+					},
 				},
 			},
 		});
 
 		return NextResponse.json(cart);
-
 	} catch (err) {
 		console.log('[CART_GET] Server error', err);
 		return NextResponse.json(

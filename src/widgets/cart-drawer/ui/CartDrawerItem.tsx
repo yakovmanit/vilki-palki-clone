@@ -7,8 +7,11 @@ import { Ingredient } from '@prisma/client';
 import Image from 'next/image';
 
 import { Counter } from '@entities/product-card/ui/Counter';
+import {
+	useDeleteCartItemMutation,
+	useUpdateCartItemMutation,
+} from '@shared/redux';
 import { Title } from '@shared/ui';
-import { useDeleteCartItemMutation, useUpdateCartItemMutation } from '@shared/redux';
 
 interface Props {
 	cartItemId: number;
@@ -40,7 +43,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 		if (!cartItemId) return;
 
 		await deleteCartItem({ id: cartItemId });
-	}
+	};
 
 	const handleUpdateOrDeleteCartItem = async (type: 'minus' | 'plus') => {
 		if (!cartItemId) return;
@@ -51,26 +54,29 @@ export const CartDrawerItem: React.FC<Props> = ({
 				return;
 			}
 
-			setCounterValue((prev) => (prev > 1 ? prev - 1 : 1))
+			setCounterValue((prev) => (prev > 1 ? prev - 1 : 1));
 
 			await updateCartItem({
 				id: cartItemId,
-				quantity: counterValue - 1
+				quantity: counterValue - 1,
 			});
 		} else {
-			setCounterValue((prev) => prev + 1)
+			setCounterValue((prev) => prev + 1);
 
 			await updateCartItem({
 				id: cartItemId,
-				quantity: counterValue + 1
+				quantity: counterValue + 1,
 			});
 		}
-	}
+	};
 
 	return (
 		<div className='p-2 border-[2px] border-gray-200 rounded-md relative'>
 			<div className='flex items-center gap-3 '>
-				<button onClick={handleDeleteCartItem} className='absolute right-0 top-1 w-5 h-5 text-custom-gray'>
+				<button
+					onClick={handleDeleteCartItem}
+					className='absolute right-0 top-1 w-5 h-5 text-custom-gray'
+				>
 					<X className='w-4 h-4' />
 				</button>
 
