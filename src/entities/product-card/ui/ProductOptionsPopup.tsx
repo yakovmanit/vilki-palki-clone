@@ -1,17 +1,23 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import React, {
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 
 import { Ingredient } from '@prisma/client';
 import { enableBodyScroll } from 'body-scroll-lock';
 
 import { cn } from '@shared/lib';
 import { OptionWithIngredients } from '@shared/model/types';
+import { useAddCartItemMutation, useGetCartQuery } from '@shared/redux';
 import { Button, CloseIcon, Container, Title } from '@shared/ui';
 
 import { Counter } from './Counter';
 import { Option } from './Option';
-import { useAddCartItemMutation, useGetCartQuery } from '@shared/redux';
 
 interface Props {
 	productId: number;
@@ -82,7 +88,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 			productId: productId,
 			quantity: count,
 		});
-	}
+	};
 
 	return (
 		<div
@@ -134,10 +140,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 						<Counter count={count} setCount={setCount} isPopupCounter={true} />
 					</div>
 
-					<Button
-						onClick={handleAddCartItem}
-						className='w-full text-lg'
-					>
+					<Button onClick={handleAddCartItem} className='w-full text-lg'>
 						Додати в кошик
 					</Button>
 				</Container>

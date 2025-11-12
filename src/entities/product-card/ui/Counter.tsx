@@ -21,7 +21,7 @@ export const Counter: React.FC<Props> = ({
 
 	const handleDecrement = () => {
 		if (setCount) {
-			setCount(prev => Math.max(1, prev - 1));
+			setCount((prev) => Math.max(1, prev - 1));
 		} else {
 			handleUpdateCartItem?.('minus');
 		}
@@ -29,7 +29,7 @@ export const Counter: React.FC<Props> = ({
 
 	const handleIncrement = () => {
 		if (setCount) {
-			setCount(prev => prev + 1);
+			setCount((prev) => prev + 1);
 		} else {
 			handleUpdateCartItem?.('plus');
 		}

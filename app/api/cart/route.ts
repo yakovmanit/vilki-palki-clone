@@ -1,9 +1,11 @@
+import crypto from 'crypto';
+
+import { findOrCreateCart } from '@prisma/lib/find-or-create-cart';
+import { updateCartTotalAmount } from '@prisma/lib/update-cart-total-amount';
 import { prisma } from '@prisma/prisma-client';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
-import { findOrCreateCart } from '@prisma/lib/find-or-create-cart';
-import { updateCartTotalAmount } from '@prisma/lib/update-cart-total-amount';
+
 import { CartItemDTO } from '@shared/model/types';
 
 export async function GET(req: NextRequest) {
@@ -84,7 +86,7 @@ export async function POST(req: NextRequest) {
 					cartId: cart.id,
 					productId: reqBody.productId,
 					ingredients: {
-						connect: reqBody.ingredients.map(id => ({ id }))
+						connect: reqBody.ingredients.map((id) => ({ id })),
 					},
 				},
 			});
@@ -101,7 +103,9 @@ export async function POST(req: NextRequest) {
 
 		await updateCartTotalAmount(userToken);
 
-		const res = NextResponse.json({ message: 'Cart item created successfully' });
+		const res = NextResponse.json({
+			message: 'Cart item created successfully',
+		});
 
 		res.cookies.set({
 			name: 'userToken',
@@ -110,8 +114,7 @@ export async function POST(req: NextRequest) {
 		});
 
 		return res;
-
-	} catch(err) {
+	} catch (err) {
 		console.log('[CART_POST] Server error', err);
 		return NextResponse.json(
 			{ message: 'Failed to create cart item' },

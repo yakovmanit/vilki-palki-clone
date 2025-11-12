@@ -9,9 +9,9 @@ export const findOrCreateCart = async (userToken: string) => {
 			cartItems: {
 				include: {
 					ingredients: true,
-				}
+				},
 			},
-		}
+		},
 	});
 
 	if (!cart) {
@@ -23,11 +23,11 @@ export const findOrCreateCart = async (userToken: string) => {
 				cartItems: {
 					include: {
 						ingredients: true,
-					}
+					},
 				},
-			}
+			},
 		});
 	}
 
 	return cart;
-}
+};

@@ -24,4 +24,4 @@ export type CartItemDTO = {
 	quantity: number;
 	productId: number;
 	ingredients: number[];
-}
+};

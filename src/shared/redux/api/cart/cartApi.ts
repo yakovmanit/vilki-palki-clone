@@ -61,5 +61,5 @@ export const {
 	useGetCartQuery,
 	useUpdateCartItemMutation,
 	useDeleteCartItemMutation,
-	useAddCartItemMutation
+	useAddCartItemMutation,
 } = cartApi;
