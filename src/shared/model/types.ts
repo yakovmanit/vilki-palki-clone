@@ -19,3 +19,9 @@ export type FullCartItem = CartItem & { ingredients: Ingredient[] } & {
 };
 
 export type ExtendedCart = Cart & { cartItems: FullCartItem[] };
+
+export type CartItemDTO = {
+	quantity: number;
+	productId: number;
+	ingredients: number[];
+}

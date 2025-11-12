@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Ingredient } from '@prisma/client';
 import Image from 'next/image';
@@ -38,6 +38,10 @@ export const CartDrawerItem: React.FC<Props> = ({
 
 	const [updateCartItem] = useUpdateCartItemMutation();
 	const [deleteCartItem] = useDeleteCartItemMutation();
+
+	useEffect(() => {
+		setCounterValue(quantity);
+	}, [quantity]);
 
 	const handleDeleteCartItem = async () => {
 		if (!cartItemId) return;

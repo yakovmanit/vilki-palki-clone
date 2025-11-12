@@ -1,4 +1,4 @@
-import { ExtendedCart } from '@shared/model/types';
+import { CartItemDTO, ExtendedCart } from '@shared/model/types';
 
 import { api } from '../api';
 
@@ -25,6 +25,14 @@ const cartApi = api
 					method: 'DELETE',
 				}),
 			}),
+
+			addCartItem: build.mutation<void, CartItemDTO>({
+				query: (cartItemData) => ({
+					url: '/cart',
+					method: 'POST',
+					body: cartItemData,
+				}),
+			}),
 		}),
 
 		overrideExisting: false,
@@ -43,6 +51,9 @@ const cartApi = api
 			deleteCartItem: {
 				invalidatesTags: ['Cart'],
 			},
+			addCartItem: {
+				invalidatesTags: ['Cart'],
+			},
 		},
 	});
 
@@ -50,4 +61,5 @@ export const {
 	useGetCartQuery,
 	useUpdateCartItemMutation,
 	useDeleteCartItemMutation,
+	useAddCartItemMutation
 } = cartApi;

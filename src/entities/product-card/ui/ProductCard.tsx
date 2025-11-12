@@ -28,6 +28,7 @@ interface Props {
 
 export const ProductCard: React.FC<Props> = ({
 	className,
+	id,
 	titleUK,
 	titleEN,
 	price,
@@ -59,6 +60,7 @@ export const ProductCard: React.FC<Props> = ({
 			)}
 		>
 			<ProductOptionsPopup
+				productId={id}
 				title={titleUK}
 				options={options}
 				isOpen={isProductPopupOpen}

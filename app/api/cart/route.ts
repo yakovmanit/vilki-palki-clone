@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { findOrCreateCart } from '@prisma/lib/find-or-create-cart';
 import { updateCartTotalAmount } from '@prisma/lib/update-cart-total-amount';
+import { CartItemDTO } from '@shared/model/types';
 
 export async function GET(req: NextRequest) {
 	try {
@@ -61,11 +62,7 @@ export async function POST(req: NextRequest) {
 
 		const cart = await findOrCreateCart(userToken);
 
-		const reqBody = (await req.json()) as {
-			quantity: number;
-			productId: number;
-			ingredients: number[];
-		};
+		const reqBody = (await req.json()) as CartItemDTO;
 
 		const cartItem = await prisma.cartItem.findFirst({
 			where: {
@@ -97,7 +94,7 @@ export async function POST(req: NextRequest) {
 					id: cartItem.id,
 				},
 				data: {
-					quantity: cartItem.quantity + 1,
+					quantity: cartItem.quantity + reqBody.quantity,
 				},
 			});
 		}
