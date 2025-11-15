@@ -7,7 +7,7 @@ import { HeroSection } from './HeroSection';
 
 const Home = async () => {
 	return (
-		<main className='pb-100 pt-[54px]'>
+		<>
 			<HeroSection className='pb-9' />
 
 			<CategorySection className='pb-9' />
@@ -15,7 +15,7 @@ const Home = async () => {
 			<Filters />
 
 			<ProductCardList className='mt-11' />
-		</main>
+		</>
 	);
 };
 

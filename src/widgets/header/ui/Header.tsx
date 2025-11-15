@@ -13,7 +13,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 	return (
 		<header
 			className={cn(
-				'bg-primary flex items-center justify-between fixed w-full z-50',
+				'bg-primary flex items-center justify-between fixed top-0 left-0 w-full z-50',
 				className,
 			)}
 		>

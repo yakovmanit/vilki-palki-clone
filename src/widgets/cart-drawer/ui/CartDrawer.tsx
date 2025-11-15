@@ -66,7 +66,7 @@ export const CartDrawer: React.FC = () => {
 			{/* Cart Drawer */}
 			<div
 				className={cn(
-					'pb-20 bg-white fixed z-20 top-0 left-0 w-full h-full overflow-y-auto transition duration-300 ease-in-out md:w-[500px] mt-[54px]',
+					'pb-40 bg-white fixed z-20 top-0 left-0 w-full h-full overflow-y-auto transition duration-300 ease-in-out md:w-[500px] mt-[54px]',
 					{
 						'transform translate-y-full': !isCartDrawerOpen,
 					},

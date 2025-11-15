@@ -36,7 +36,7 @@ export default async function HomeLayout({
 	setRequestLocale(locale);
 
 	return (
-		<main>
+		<main className='pb-100 pt-[54px]'>
 			<ServerProviders>
 				<ClientProviders>
 					<Header />
