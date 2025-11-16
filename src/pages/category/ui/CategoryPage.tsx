@@ -6,6 +6,8 @@ import { CategoryFilter } from '@prisma/client';
 import { Container } from '@shared/ui';
 import { Category } from '@prisma/client';
 import { Link } from '@shared/lib/i18n';
+import { useGetProductQuery } from '@shared/redux';
+import { useState } from 'react';
 
 interface Props {
 	slug: string;
@@ -15,9 +17,15 @@ interface Props {
 }
 
 export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug }: Props) => {
+	const [filterId, setFilterId] = useState(0);
+
+	const { data: categoryProducts, isLoading: isCategoryProducts } = useGetProductQuery({ categorySlug: slug, filterId: filterId });
+
 	return (
 		<Container>
 			<Filters
+				filterId={filterId}
+				setFilterId={setFilterId}
 				filters={filters}
 				title={categoryTitle}
 			/>
@@ -34,7 +42,11 @@ export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug 
 				))
 			}
 
-			<ProductCardList className='mt-11' />
+			<ProductCardList
+				categoryProducts={categoryProducts}
+				isCategoryProducts={isCategoryProducts}
+				className='mt-11'
+			/>
 		</Container>
 	);
 };

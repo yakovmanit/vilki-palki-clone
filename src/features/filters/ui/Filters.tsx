@@ -2,17 +2,17 @@
 
 import React from 'react';
 import { cn } from '@shared/lib';
-import { Button, Container, Title } from '@shared/ui';
+import { Button, Title } from '@shared/ui';
 import { CategoryFilter } from '@prisma/client';
 
 interface Props {
+	filterId: number;
+	setFilterId: React.Dispatch<React.SetStateAction<number>>;
 	filters: CategoryFilter[];
 	title: string;
 }
 
-export const Filters: React.FC<Props> = ({ title, filters }) => {
-	const [activeFilterId, setActiveFilterId] = React.useState(1);
-
+export const Filters: React.FC<Props> = ({ title, filters, filterId, setFilterId }) => {
 	return (
 		<section>
 			<Title size='xl' text={title} />
@@ -26,9 +26,9 @@ export const Filters: React.FC<Props> = ({ title, filters }) => {
 								variant='plain'
 								className={cn({
 									'bg-custom-pink text-custom-blue border-custom-pink':
-										activeFilterId === filter.id,
+										filterId === filter.id,
 								})}
-								onClick={() => setActiveFilterId(filter.id)}
+								onClick={() => setFilterId(filter.id)}
 							>
 								{filter.titleUK}
 							</Button>
