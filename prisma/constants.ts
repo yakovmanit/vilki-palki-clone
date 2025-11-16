@@ -73,13 +73,6 @@ export const categories = [
 		imageUrl: 'https://cdn-icons-png.flaticon.com/512/6805/6805578.png',
 	},
 	{
-		id: 2,
-		titleUK: 'Роли',
-		titleEN: 'Rolls',
-		slug: 'rolls',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3978/3978693.png',
-	},
-	{
 		id: 3,
 		titleUK: 'Суші',
 		titleEN: 'Sushi',
@@ -100,27 +93,13 @@ export const categories = [
 		slug: 'drinks',
 		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3132/3132691.png',
 	},
-	// Subcategories for Роли
-	{
-		id: 6,
-		titleUK: 'Гарячі роли',
-		titleEN: 'Hot rolls',
-		slug: 'hot-rolls',
-		parentCategoryId: 2,
-	},
-	{
-		id: 7,
-		titleUK: 'Холодні роли',
-		titleEN: 'Cold rolls',
-		slug: 'cold-rolls',
-		parentCategoryId: 2,
-	},
 	// Subcategories for Суші
 	{
-		id: 8,
-		titleUK: 'Нігірі',
-		titleEN: 'Nigiri',
-		slug: 'nigiri',
+		id: 2,
+		titleUK: 'Роли',
+		titleEN: 'Rolls',
+		slug: 'rolls',
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3978/3978693.png',
 		parentCategoryId: 3,
 	},
 	{
@@ -129,6 +108,21 @@ export const categories = [
 		titleEN: 'Gunkan',
 		slug: 'gunkan',
 		parentCategoryId: 3,
+	},
+	{
+		id: 6,
+		titleUK: 'Теплі роли',
+		titleEN: 'Warm rolls',
+		slug: 'warm-rolls',
+		parentCategoryId: 3,
+	},
+	// Subcategories for Роли
+	{
+		id: 7,
+		titleUK: 'Холодні роли',
+		titleEN: 'Cold rolls',
+		slug: 'cold-rolls',
+		parentCategoryId: 2,
 	},
 	// Subcategories for Піца
 	{

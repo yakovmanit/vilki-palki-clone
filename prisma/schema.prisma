@@ -22,6 +22,8 @@ model Product {
 
   category Category[]
 
+  categoryFilters CategoryFilter[]
+
   cartItem CartItem[]
 
   createdAt DateTime @default(now())
@@ -73,6 +75,8 @@ model Category {
   parentCategory   Category?  @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
   category         Category[] @relation("CategoryToCategory")
 
+  categoryFilters CategoryFilter[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -120,6 +124,16 @@ model CartItem {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model CategoryFilter {
+  id      Int    @id @default(autoincrement())
+  titleUK String
+  titleEN String
+
+  categories Category[]
+
+  products Product[]
 }
 
 enum UserRole {
