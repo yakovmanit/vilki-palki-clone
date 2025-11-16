@@ -18,6 +18,18 @@ export const Filters: React.FC<Props> = ({ title, filters, filterId, setFilterId
 			<Title size='xl' text={title} />
 
 			<ul className='flex gap-2 flex-wrap'>
+				<li>
+					<Button
+						size='rounded'
+						variant='plain'
+						className={cn({
+							'bg-custom-pink text-custom-blue border-custom-pink': filterId === 0,
+						})}
+						onClick={() => setFilterId(0)}
+					>
+						Всі
+					</Button>
+				</li>
 				{
 					filters?.map((filter) => (
 						<li key={filter.id}>
