@@ -103,7 +103,7 @@ export const subcategories = [
 		slug: 'rolls',
 		parentSlug: 'sushi',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
+			'https://vilki-palki.od.ua/storage/img/9a/ce/1730981127п.png',
 	},
 	{
 		titleUK: 'Гункан',
@@ -111,7 +111,7 @@ export const subcategories = [
 		slug: 'gunkan',
 		parentSlug: 'sushi',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/bb/19/1622562993ГунканСемга.png',
+			'https://vilki-palki.od.ua/storage/img/99/0f/1611670478123123.png',
 	},
 	{
 		titleUK: 'Теплі роли',
@@ -119,7 +119,7 @@ export const subcategories = [
 		slug: 'warm-rolls',
 		parentSlug: 'sushi',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/97/20/1729021525банзайфон.jpg',
+			'https://vilki-palki.od.ua/storage/img/25/c5/1730980755о.png',
 	},
 	// Підкатегорія для Роли (вложенная)
 	{
@@ -228,7 +228,7 @@ export const products = [
 		slug: 'eel-gunkan',
 		price: 85,
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img-cache/gunkan-crab.png.webp',
+			'https://vilki-palki.od.ua/storage/img/67/51/1622562469НигириУгорь.png',
 		weight: 48,
 	},
 	// М'ясна піца (Meat pizza)
