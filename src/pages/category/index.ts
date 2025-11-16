@@ -1,3 +1,1 @@
-import CategoryPage from './ui/CategoryPage';
-
-export { CategoryPage };
+export { CategoryPage } from './ui/CategoryPage';

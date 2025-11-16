@@ -1,6 +1,5 @@
 import { CategoryPage } from '@pages/category';
 import { prisma } from '@prisma/prisma-client';
-import { ProductWithRelations } from '@shared/model/types';
 
 export default async function Category({ params }: { params: { slug: string } }) {
 	const slug = await params.slug;
@@ -12,17 +11,6 @@ export default async function Category({ params }: { params: { slug: string } })
 		include: {
 			parent: true,
 			children: true,
-			products: {
-				include: {
-					ingredients: true,
-					categoryFilters: true,
-					options: {
-						include: {
-							ingredients: true,
-						}
-					}
-				}
-			},
 			categoryFilters: true,
 		}
 	});
@@ -30,8 +18,9 @@ export default async function Category({ params }: { params: { slug: string } })
 	console.log(category);
 
 	return <CategoryPage
+		slug={slug}
 		categoryTitle={category?.titleUK || 'Category'}
-		allCategoryProducts={category?.products as ProductWithRelations[]}
 		filters={category?.categoryFilters ?? []}
+		childrenCategories={category?.children || []}
 	/>;
 }
