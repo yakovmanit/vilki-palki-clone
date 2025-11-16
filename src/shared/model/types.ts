@@ -1,4 +1,4 @@
-import { Cart, CartItem, Ingredient, Option, Product } from '@prisma/client';
+import { Cart, CartItem, Category, Ingredient, Option, Product } from '@prisma/client';
 
 export type OptionWithIngredients = Option & { ingredients: Ingredient[] };
 
@@ -24,4 +24,9 @@ export type CartItemDTO = {
 	quantity: number;
 	productId: number;
 	ingredients: number[];
+};
+
+export type FullCategory = Category & {
+	children?: FullCategory[];
+	products: ProductWithRelations[];
 };

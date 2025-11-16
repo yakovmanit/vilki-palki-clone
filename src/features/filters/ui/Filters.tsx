@@ -10,7 +10,11 @@ import { setCategoryId } from '@shared/redux/slices/categorySlice';
 import { RootState } from '@shared/redux/store';
 import { Button, Container, Title } from '@shared/ui';
 
-export const Filters: React.FC = () => {
+interface Props {
+	title: string;
+}
+
+export const Filters: React.FC<Props> = ({ title }) => {
 	const { isCategoriesLoading, parentCategories } = useCategoryItems();
 
 	const activeCategoryId = useSelector(
@@ -22,8 +26,7 @@ export const Filters: React.FC = () => {
 	return (
 		<section>
 			<Container>
-				<Title size='xl' text='Доставка їжі' />
-				<Title size='lg' text='Категорії' className='mb-5' />
+				<Title size='xl' text={title} />
 
 				<ul className='flex gap-2 flex-wrap'>
 					{

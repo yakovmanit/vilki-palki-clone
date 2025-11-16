@@ -63,81 +63,87 @@ export const ingredients = [
 	},
 ];
 
+// Главные категории (без родителя)
 export const categories = [
-	// Main categories
 	{
-		id: 1,
 		titleUK: 'Все',
 		titleEN: 'All',
 		slug: 'all',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/6805/6805578.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
 	},
 	{
-		id: 3,
 		titleUK: 'Суші',
 		titleEN: 'Sushi',
 		slug: 'sushi',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/129/129300.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
 	},
 	{
-		id: 4,
 		titleUK: 'Піца',
 		titleEN: 'Pizza',
 		slug: 'pizza',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/599/599995.png',
+		imageUrl: 'https://vilki-palki.od.ua/storage/img/15/60/17253073392.jpg',
 	},
 	{
-		id: 5,
 		titleUK: 'Напої',
 		titleEN: 'Drinks',
 		slug: 'drinks',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3132/3132691.png',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/b1/5f/16242801651623150280кока-кола.jpg',
 	},
-	// Subcategories for Суші
+];
+
+// Подкатегории (с указанием slug родителя)
+export const subcategories = [
+	// Підкатегорії для Суші
 	{
-		id: 2,
 		titleUK: 'Роли',
 		titleEN: 'Rolls',
 		slug: 'rolls',
-		imageUrl: 'https://cdn-icons-png.flaticon.com/512/3978/3978693.png',
-		parentCategoryId: 3,
+		parentSlug: 'sushi',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
 	},
 	{
-		id: 9,
 		titleUK: 'Гункан',
 		titleEN: 'Gunkan',
 		slug: 'gunkan',
-		parentCategoryId: 3,
+		parentSlug: 'sushi',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/bb/19/1622562993ГунканСемга.png',
 	},
 	{
-		id: 6,
 		titleUK: 'Теплі роли',
 		titleEN: 'Warm rolls',
 		slug: 'warm-rolls',
-		parentCategoryId: 3,
+		parentSlug: 'sushi',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/97/20/1729021525банзайфон.jpg',
 	},
-	// Subcategories for Роли
+	// Підкатегорія для Роли (вложенная)
 	{
-		id: 7,
 		titleUK: 'Холодні роли',
 		titleEN: 'Cold rolls',
 		slug: 'cold-rolls',
-		parentCategoryId: 2,
+		parentSlug: 'rolls',
+		imageUrl:
+			'https://vilki-palki.od.ua/storage/img/37/5c/1729021026яматофон.jpg',
 	},
-	// Subcategories for Піца
+	// Підкатегорії для Піца
 	{
-		id: 10,
 		titleUK: "М'ясна піца",
 		titleEN: 'Meat pizza',
 		slug: 'meat-pizza',
-		parentCategoryId: 4,
+		parentSlug: 'pizza',
+		imageUrl: 'https://vilki-palki.od.ua/storage/img/8d/f7/174410197212.jpg',
 	},
 	{
-		id: 11,
 		titleUK: 'Вегетаріанська піца',
 		titleEN: 'Vegetarian pizza',
 		slug: 'vegetarian-pizza',
-		parentCategoryId: 4,
+		parentSlug: 'pizza',
+		imageUrl: 'https://vilki-palki.od.ua/storage/img/15/60/17513787622.jpg',
 	},
 ];
 

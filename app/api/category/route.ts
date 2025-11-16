@@ -5,7 +5,17 @@ export async function GET() {
 	try {
 		const categories = await prisma.category.findMany({
 			include: {
-				parentCategory: true,
+				parent: true,
+				children: {
+					include: {
+						products: {
+							include: {
+								categoryFilters: true,
+							}
+						},
+						categoryFilters: true,
+					}
+				},
 				products: {
 					include: {
 						categoryFilters: true,

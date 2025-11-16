@@ -5,11 +5,11 @@ export const useCategoryItems = () => {
 		useGetCategoryQuery();
 
 	const parentCategories = allCategories?.filter(
-		(category) => !category.parentCategoryId,
+		(category) => !category.parentId,
 	);
 
 	const childCategories = allCategories?.filter(
-		(category) => !category.parentCategoryId,
+		(category) => !category.parentId,
 	);
 
 	return {

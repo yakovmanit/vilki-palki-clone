@@ -1,7 +1,18 @@
-const Category = async () => {
+import { Filters } from '@features/filters';
+import { ProductCardList } from '@entities/product-card-list';
+import { ProductWithRelations } from '@shared/model/types';
+
+interface Props {
+	categoryTitle: string;
+	allCategoryProducts: ProductWithRelations[];
+}
+
+const Category = async ({ categoryTitle, allCategoryProducts }: Props) => {
 	return (
 		<>
-			CategoryPage
+			<Filters title={categoryTitle} />
+
+			<ProductCardList className='mt-11' products={allCategoryProducts} />
 		</>
 	);
 };

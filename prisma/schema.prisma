@@ -63,7 +63,7 @@ model Option {
 }
 
 model Category {
-  id       Int     @id @default(autoincrement())
+  id       String  @id @default(uuid())
   titleUK  String
   titleEN  String
   slug     String  @unique
@@ -71,14 +71,19 @@ model Category {
 
   products Product[]
 
-  parentCategoryId Int?
-  parentCategory   Category?  @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
-  category         Category[] @relation("CategoryToCategory")
+  parentId String?
+
+  parent   Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryToCategory")
 
   categoryFilters CategoryFilter[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([id])
+  @@index([titleUK])
+  @@index([slug])
 }
 
 model User {

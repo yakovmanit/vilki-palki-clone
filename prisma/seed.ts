@@ -1,6 +1,11 @@
 import { UserRole } from '@prisma/client';
 
-import { categories, ingredients, products } from './constants';
+import {
+	categories,
+	subcategories,
+	ingredients,
+	products,
+} from './constants';
 import { prisma } from './prisma-client';
 
 async function up() {
@@ -53,50 +58,107 @@ async function up() {
 		data: ingredients,
 	});
 
-	// 2. Create Categories
+	// 2. Create main Categories
 	await prisma.category.createMany({
 		data: categories,
 	});
 
-	// 2.1. Connect filters to categories (many-to-many)
+	// 3. Create Subcategories with parent relationships
+	for (const subcat of subcategories) {
+		const parent = await prisma.category.findUnique({
+			where: { slug: subcat.parentSlug },
+		});
+
+		if (parent) {
+			await prisma.category.create({
+				data: {
+					titleUK: subcat.titleUK,
+					titleEN: subcat.titleEN,
+					slug: subcat.slug,
+					imageUrl: subcat.imageUrl,
+					parentId: parent.id,
+				},
+			});
+		}
+	}
+
+	// 4. Connect filters to categories (many-to-many)
 	// Суші category filters: Нові, Гострі, З сьомгою, З вугрем
-	await prisma.category.update({
-		where: { id: 3 }, // Суші
-		data: {
-			categoryFilters: {
-				connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }], // Нові, Гострі, З сьомгою, З вугрем
-			},
-		},
+	const sushiCategory = await prisma.category.findUnique({
+		where: { slug: 'sushi' },
 	});
+	if (sushiCategory) {
+		await prisma.category.update({
+			where: { id: sushiCategory.id },
+			data: {
+				categoryFilters: {
+					connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+				},
+			},
+		});
+	}
 
 	// Роли subcategory filters: З сьомгою, З креветкою, Веганські
-	await prisma.category.update({
-		where: { id: 2 }, // Роли
-		data: {
-			categoryFilters: {
-				connect: [{ id: 3 }, { id: 5 }, { id: 6 }], // З сьомгою, З креветкою, Веганські
-			},
-		},
+	const rollsCategory = await prisma.category.findUnique({
+		where: { slug: 'rolls' },
 	});
+	if (rollsCategory) {
+		await prisma.category.update({
+			where: { id: rollsCategory.id },
+			data: {
+				categoryFilters: {
+					connect: [{ id: 3 }, { id: 5 }, { id: 6 }],
+				},
+			},
+		});
+	}
 
 	// Гункан subcategory filters: З вугрем, З креветкою
-	await prisma.category.update({
-		where: { id: 9 }, // Гункан
-		data: {
-			categoryFilters: {
-				connect: [{ id: 4 }, { id: 5 }], // З вугрем, З креветкою
-			},
-		},
+	const gunkanCategory = await prisma.category.findUnique({
+		where: { slug: 'gunkan' },
 	});
+	if (gunkanCategory) {
+		await prisma.category.update({
+			where: { id: gunkanCategory.id },
+			data: {
+				categoryFilters: {
+					connect: [{ id: 4 }, { id: 5 }],
+				},
+			},
+		});
+	}
 
 	// Теплі роли has no filters
 
-	// 3. Create Products with basic data
+	// 5. Create Products with basic data
 	await prisma.product.createMany({
 		data: products,
 	});
 
-	// 4. Create Options with ingredients
+	// 6. Get all categories for later use
+	const allCategory = await prisma.category.findUnique({
+		where: { slug: 'all' },
+	});
+	const warmRollsCategory = await prisma.category.findUnique({
+		where: { slug: 'warm-rolls' },
+	});
+	const coldRollsCategory = await prisma.category.findUnique({
+		where: { slug: 'cold-rolls' },
+	});
+	const meatPizzaCategory = await prisma.category.findUnique({
+		where: { slug: 'meat-pizza' },
+	});
+	const vegetarianPizzaCategory = await prisma.category.findUnique({
+		where: { slug: 'vegetarian-pizza' },
+	});
+	const drinksCategory = await prisma.category.findUnique({
+		where: { slug: 'drinks' },
+	});
+	const pizzaCategory = await prisma.category.findUnique({
+		where: { slug: 'pizza' },
+	});
+
+	// 7. Create Options with ingredients
 	const option1 = await prisma.option.create({
 		data: {
 			id: 1,
@@ -133,228 +195,284 @@ async function up() {
 		},
 	});
 
-	// 5. Update products with categories, options and ingredients
+	// 8. Update products with categories, options and ingredients
 
-	// Теплі роли (Warm rolls) - категорія 6 (під Суші)
-	await prisma.product.update({
-		where: { id: 1 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 6 }], // Все + Суші + Теплі роли
+	// Теплі роли (Warm rolls)
+	if (allCategory && sushiCategory && warmRollsCategory) {
+		await prisma.product.update({
+			where: { id: 1 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: warmRollsCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 1 }, { id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 1 }, { id: 2 }], // Нові, Гострі
+				},
 			},
-			// Роли без опцій
-			ingredients: {
-				connect: [{ id: 1 }, { id: 2 }],
-			},
-			// Filters from Суші category: Нові, Гострі
-			categoryFilters: {
-				connect: [{ id: 1 }, { id: 2 }], // Нові, Гострі
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 2 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 6 }], // Все + Суші + Теплі роли
+		await prisma.product.update({
+			where: { id: 2 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: warmRollsCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 1 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 1 }, { id: 3 }], // Нові, З сьомгою
+				},
 			},
-			// Роли без опцій
-			ingredients: {
-				connect: [{ id: 1 }],
-			},
-			// Filters from Суші category: Нові, З сьомгою
-			categoryFilters: {
-				connect: [{ id: 1 }, { id: 3 }], // Нові, З сьомгою
-			},
-		},
-	});
+		});
+	}
 
-	// Холодні роли (Cold rolls) - категорія 7 (під Роли, які під Суші)
-	await prisma.product.update({
-		where: { id: 3 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 2 }, { id: 7 }], // Все + Суші + Роли + Холодні роли
+	// Холодні роли (Cold rolls)
+	if (allCategory && sushiCategory && rollsCategory && coldRollsCategory) {
+		await prisma.product.update({
+			where: { id: 3 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: rollsCategory.id },
+						{ id: coldRollsCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 1 }, { id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 3 }], // З сьомгою
+				},
 			},
-			// Роли без опцій
-			ingredients: {
-				connect: [{ id: 1 }, { id: 2 }],
-			},
-			// Filters: З сьомгою (shared filter)
-			categoryFilters: {
-				connect: [{ id: 3 }], // З сьомгою
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 4 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 2 }, { id: 7 }], // Все + Суші + Роли + Холодні роли
+		await prisma.product.update({
+			where: { id: 4 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: rollsCategory.id },
+						{ id: coldRollsCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 6 }], // Веганські
+				},
 			},
-			// Роли без опцій
-			ingredients: {
-				connect: [{ id: 2 }],
-			},
-			// Filters: Веганські
-			categoryFilters: {
-				connect: [{ id: 6 }], // Веганські
-			},
-		},
-	});
+		});
+	}
 
-	// Нігірі (moved to just Sushi category)
-	await prisma.product.update({
-		where: { id: 5 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }], // Все + Суші
+	// Нігірі (just Sushi category)
+	if (allCategory && sushiCategory) {
+		await prisma.product.update({
+			where: { id: 5 },
+			data: {
+				category: {
+					connect: [{ id: allCategory.id }, { id: sushiCategory.id }],
+				},
+				ingredients: {
+					connect: [{ id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 3 }], // З сьомгою
+				},
 			},
-			// Суші без опцій
-			ingredients: {
-				connect: [{ id: 2 }],
-			},
-			// Filters from Суші: З сьомгою
-			categoryFilters: {
-				connect: [{ id: 3 }], // З сьомгою
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 6 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }], // Все + Суші
+		await prisma.product.update({
+			where: { id: 6 },
+			data: {
+				category: {
+					connect: [{ id: allCategory.id }, { id: sushiCategory.id }],
+				},
+				ingredients: {
+					connect: [{ id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 4 }], // З вугрем
+				},
 			},
-			// Суші без опцій
-			ingredients: {
-				connect: [{ id: 2 }],
-			},
-			// Filters from Суші: З вугрем
-			categoryFilters: {
-				connect: [{ id: 4 }], // З вугрем
-			},
-		},
-	});
+		});
+	}
 
-	// Гункан (Gunkan) - категорія 9
-	await prisma.product.update({
-		where: { id: 7 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
+	// Гункан (Gunkan)
+	if (allCategory && sushiCategory && gunkanCategory) {
+		await prisma.product.update({
+			where: { id: 7 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: gunkanCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 3 }], // З сьомгою
+				},
 			},
-			// Суші без опцій
-			ingredients: {
-				connect: [{ id: 2 }],
-			},
-			// Filters: З сьомгою (shared filter)
-			categoryFilters: {
-				connect: [{ id: 3 }], // З сьомгою
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 8 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 3 }, { id: 9 }], // Все + Суші + Гункан
+		await prisma.product.update({
+			where: { id: 8 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: sushiCategory.id },
+						{ id: gunkanCategory.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 2 }],
+				},
+				categoryFilters: {
+					connect: [{ id: 4 }], // З вугрем
+				},
 			},
-			// Суші без опцій
-			ingredients: {
-				connect: [{ id: 2 }],
-			},
-			// Filters: З вугрем (shared filter)
-			categoryFilters: {
-				connect: [{ id: 4 }], // З вугрем
-			},
-		},
-	});
+		});
+	}
 
-	// М'ясна піца (Meat pizza) - категорія 10
-	await prisma.product.update({
-		where: { id: 9 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
+	// М'ясна піца (Meat pizza)
+	if (allCategory && pizzaCategory && meatPizzaCategory) {
+		await prisma.product.update({
+			where: { id: 9 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: pizzaCategory.id },
+						{ id: meatPizzaCategory.id },
+					],
+				},
+				options: {
+					connect: [
+						{ id: option1.id },
+						{ id: option2.id },
+						{ id: option3.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 6 }, { id: 7 }],
+				},
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
-			},
-			ingredients: {
-				connect: [{ id: 6 }, { id: 7 }],
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 10 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 4 }, { id: 10 }], // Все + Піца + М'ясна піца
+		await prisma.product.update({
+			where: { id: 10 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: pizzaCategory.id },
+						{ id: meatPizzaCategory.id },
+					],
+				},
+				options: {
+					connect: [
+						{ id: option1.id },
+						{ id: option2.id },
+						{ id: option3.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 6 }, { id: 7 }],
+				},
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
-			},
-			ingredients: {
-				connect: [{ id: 6 }, { id: 7 }],
-			},
-		},
-	});
+		});
+	}
 
-	// Вегетаріанська піца (Vegetarian pizza) - категорія 11
-	await prisma.product.update({
-		where: { id: 11 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
+	// Вегетаріанська піца (Vegetarian pizza)
+	if (allCategory && pizzaCategory && vegetarianPizzaCategory) {
+		await prisma.product.update({
+			where: { id: 11 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: pizzaCategory.id },
+						{ id: vegetarianPizzaCategory.id },
+					],
+				},
+				options: {
+					connect: [
+						{ id: option1.id },
+						{ id: option2.id },
+						{ id: option3.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 7 }],
+				},
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
-			},
-			ingredients: {
-				connect: [{ id: 7 }],
-			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 12 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 4 }, { id: 11 }], // Все + Піца + Вегетаріанська піца
+		await prisma.product.update({
+			where: { id: 12 },
+			data: {
+				category: {
+					connect: [
+						{ id: allCategory.id },
+						{ id: pizzaCategory.id },
+						{ id: vegetarianPizzaCategory.id },
+					],
+				},
+				options: {
+					connect: [
+						{ id: option1.id },
+						{ id: option2.id },
+						{ id: option3.id },
+					],
+				},
+				ingredients: {
+					connect: [{ id: 5 }, { id: 7 }],
+				},
 			},
-			options: {
-				connect: [{ id: option1.id }, { id: option2.id }, { id: option3.id }], // Соус + Бортик + Додатково
-			},
-			ingredients: {
-				connect: [{ id: 5 }, { id: 7 }],
-			},
-		},
-	});
+		});
+	}
 
-	// Напої (Drinks) - категорія 5, без опцій
-	await prisma.product.update({
-		where: { id: 13 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 5 }], // Все + Напої
+	// Напої (Drinks)
+	if (allCategory && drinksCategory) {
+		await prisma.product.update({
+			where: { id: 13 },
+			data: {
+				category: {
+					connect: [{ id: allCategory.id }, { id: drinksCategory.id }],
+				},
 			},
-		},
-	});
+		});
 
-	await prisma.product.update({
-		where: { id: 14 },
-		data: {
-			category: {
-				connect: [{ id: 1 }, { id: 5 }], // Все + Напої
+		await prisma.product.update({
+			where: { id: 14 },
+			data: {
+				category: {
+					connect: [{ id: allCategory.id }, { id: drinksCategory.id }],
+				},
 			},
-		},
-	});
+		});
+	}
 
 	// 6. Create Users
 	await prisma.user.createMany({

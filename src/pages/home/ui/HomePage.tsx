@@ -1,6 +1,6 @@
-import { Filters } from '@/features/filters';
-
-import { ProductCardList } from '@entities/product-card-list';
+// import { Filters } from '@/features/filters';
+//
+// import { ProductCardList } from '@entities/product-card-list';
 
 import { CategorySection } from './CategorySection';
 import { HeroSection } from './HeroSection';
@@ -12,9 +12,9 @@ const Home = async () => {
 
 			<CategorySection className='pb-9' />
 
-			<Filters />
+			{/*<Filters />*/}
 
-			<ProductCardList className='mt-11' />
+			{/*<ProductCardList className='mt-11' />*/}
 		</>
 	);
 };
