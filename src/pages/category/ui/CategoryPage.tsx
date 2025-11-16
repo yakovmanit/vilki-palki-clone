@@ -19,7 +19,7 @@ interface Props {
 export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug }: Props) => {
 	const [filterId, setFilterId] = useState(0);
 
-	const { data: categoryProducts, isLoading: isCategoryProducts } = useGetProductQuery({ categorySlug: slug, filterId: filterId });
+	const { data: categoryProducts, isFetching: isCategoryProductsFetching } = useGetProductQuery({ categorySlug: slug, filterId: filterId });
 
 	return (
 		<Container>
@@ -44,7 +44,7 @@ export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug 
 
 			<ProductCardList
 				categoryProducts={categoryProducts}
-				isCategoryProducts={isCategoryProducts}
+				isCategoryProductsFetching={isCategoryProductsFetching}
 				className='mt-11'
 			/>
 		</Container>

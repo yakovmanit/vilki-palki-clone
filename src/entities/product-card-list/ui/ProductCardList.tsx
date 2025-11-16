@@ -6,11 +6,11 @@ import { ProductCard } from '@entities/product-card';
 
 interface Props {
 	categoryProducts?: ProductWithRelations[];
-	isCategoryProducts: boolean;
+	isCategoryProductsFetching: boolean;
 	className?: string;
 }
 
-export const ProductCardList: React.FC<Props> = ({ className, categoryProducts, isCategoryProducts }) => {
+export const ProductCardList: React.FC<Props> = ({ className, categoryProducts, isCategoryProductsFetching }) => {
 
 	return (
 		<div className={cn('', className)}>
@@ -18,7 +18,7 @@ export const ProductCardList: React.FC<Props> = ({ className, categoryProducts, 
 				<div className='grid grid-cols-2 gap-2'>
 					{/* TODO: add beautiful skeleton */}
 					{
-						isCategoryProducts ? (
+						isCategoryProductsFetching ? (
 							<div>Loading...</div>
 						) : (
 							categoryProducts?.map((product) =>
