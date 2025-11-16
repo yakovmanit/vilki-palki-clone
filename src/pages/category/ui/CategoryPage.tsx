@@ -10,13 +10,15 @@ import { useGetProductQuery } from '@shared/redux';
 import { useState } from 'react';
 
 interface Props {
+	parentSlug?: string;
+	childCategorySlug: string;
 	slug: string;
 	categoryTitle: string;
 	childrenCategories?: Category[];
 	filters: CategoryFilter[];
 }
 
-export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug }: Props) => {
+export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug, childCategorySlug, parentSlug }: Props) => {
 	const [filterId, setFilterId] = useState(0);
 
 	const { data: categoryProducts, isFetching: isCategoryProductsFetching } = useGetProductQuery({ categorySlug: slug, filterId: filterId });
@@ -35,7 +37,7 @@ export const CategoryPage = ({ categoryTitle, filters, childrenCategories, slug 
 			{
 				childrenCategories?.map(cat => (
 					<div key={cat.id} className='mt-4'>
-						<Link href={`/category/${slug}/${cat.slug}`}>
+						<Link href={`/category/${parentSlug}/${cat.slug}`} className={childCategorySlug === cat.slug ? 'pointer-events-none' : ''}>
 							{cat.titleUK}
 						</Link>
 					</div>

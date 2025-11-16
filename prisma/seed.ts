@@ -255,7 +255,7 @@ async function up() {
 					connect: [{ id: 1 }, { id: 2 }],
 				},
 				categoryFilters: {
-					connect: [{ id: 3 }], // З сьомгою
+					connect: [{ id: 3 }, { id: 5 }], // З сьомгою, З креветкою
 				},
 			},
 		});
@@ -330,7 +330,7 @@ async function up() {
 					connect: [{ id: 2 }],
 				},
 				categoryFilters: {
-					connect: [{ id: 3 }], // З сьомгою
+					connect: [{ id: 3 }, { id: 5 }], // З сьомгою, З креветкою
 				},
 			},
 		});

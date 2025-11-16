@@ -14,31 +14,29 @@ export const ProductCardList: React.FC<Props> = ({ className, categoryProducts, 
 
 	return (
 		<div className={cn('', className)}>
-			<Container>
-				<div className='grid grid-cols-2 gap-2'>
-					{/* TODO: add beautiful skeleton */}
-					{
-						isCategoryProductsFetching ? (
-							<div>Loading...</div>
-						) : (
-							categoryProducts?.map((product) =>
-								<ProductCard
-									key={product.id}
-									id={product.id}
-									titleUK={product.titleUK}
-									titleEN={product.titleEN}
-									price={product.price}
-									slug={product.slug}
-									weight={product.weight}
-									imageUrl={product.imageUrl}
-									ingredients={product.ingredients}
-									options={product.options}
-								/>
-							)
+			<div className='grid grid-cols-2 gap-2'>
+				{/* TODO: add beautiful skeleton */}
+				{
+					isCategoryProductsFetching ? (
+						<div>Loading...</div>
+					) : (
+						categoryProducts?.map((product) =>
+							<ProductCard
+								key={product.id}
+								id={product.id}
+								titleUK={product.titleUK}
+								titleEN={product.titleEN}
+								price={product.price}
+								slug={product.slug}
+								weight={product.weight}
+								imageUrl={product.imageUrl}
+								ingredients={product.ingredients}
+								options={product.options}
+							/>
 						)
-					}
-				</div>
-			</Container>
+					)
+				}
+			</div>
 		</div>
 	);
 };
