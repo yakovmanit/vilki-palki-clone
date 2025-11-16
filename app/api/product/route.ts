@@ -3,25 +3,37 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
-		const categoryId = req.nextUrl.searchParams.get('categoryId');
+		// Example:
+		// /api/product?categorySlug=sushi&filterId=1
+		const categorySlug = req.nextUrl.searchParams.get('categorySlug');
+		const filterId = req.nextUrl.searchParams.get('filterId');
 
 		const products = await prisma.product.findMany({
 			where: {
-				category: {
-					some: {
-						id: Number(categoryId),
-					},
-				},
+				...(categorySlug && {
+					category: {
+						some: {
+							slug: categorySlug,
+						}
+					}
+				}),
+				...(filterId && {
+					categoryFilters: {
+						some: {
+							id: parseInt(filterId),
+						}
+					}
+				})
 			},
 			include: {
 				ingredients: true,
-				category: true,
+				categoryFilters: true,
 				options: {
 					include: {
 						ingredients: true,
-					},
-				},
-			},
+					}
+				}
+			}
 		});
 
 		return NextResponse.json(products);
