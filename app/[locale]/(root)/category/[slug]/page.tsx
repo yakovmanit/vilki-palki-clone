@@ -32,5 +32,6 @@ export default async function Category({ params }: { params: { slug: string } })
 	return <CategoryPage
 		categoryTitle={category?.titleUK || 'Category'}
 		allCategoryProducts={category?.products as ProductWithRelations[]}
+		filters={category?.categoryFilters ?? []}
 	/>;
 }
