@@ -59,9 +59,18 @@ async function up() {
 	});
 
 	// 2. Create main Categories
-	await prisma.category.createMany({
-		data: categories,
-	});
+	for (const category of categories) {
+		await prisma.category.create({
+			data: {
+				titleUK: category.titleUK,
+				titleEN: category.titleEN,
+				slug: category.slug,
+				imageUrl: category.imageUrl,
+				// Якщо в константі є поле active, використовуємо його, інакше true
+				active: category.active !== undefined ? category.active : true,
+			},
+		});
+	}
 
 	// 3. Create Subcategories with parent relationships
 	for (const subcat of subcategories) {
@@ -129,6 +138,21 @@ async function up() {
 	}
 
 	// Теплі роли has no filters
+
+	// Популярне category filters: Нові, Гострі, З сьомгою, З вугрем, З креветкою, Веганські
+	const popularCategory = await prisma.category.findUnique({
+		where: { slug: 'popular' },
+	});
+	if (popularCategory) {
+		await prisma.category.update({
+			where: { id: popularCategory.id },
+			data: {
+				categoryFilters: {
+					connect: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }],
+				},
+			},
+		});
+	}
 
 	// 5. Create Products with basic data
 	await prisma.product.createMany({
@@ -469,6 +493,129 @@ async function up() {
 			data: {
 				category: {
 					connect: [{ id: allCategory.id }, { id: drinksCategory.id }],
+				},
+			},
+		});
+	}
+
+	// Популярне (Popular) - додаємо популярні товари з різних категорій
+	if (popularCategory) {
+		// Рол Банзай (теплий рол) - id: 1
+		await prisma.product.update({
+			where: { id: 1 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Бостон (теплий рол) - id: 2
+		await prisma.product.update({
+			where: { id: 2 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Рол Філадельфія Класік (холодний рол) - id: 3
+		await prisma.product.update({
+			where: { id: 3 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Рол Ямато (холодний рол) - id: 4
+		await prisma.product.update({
+			where: { id: 4 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Нігірі сьомга - id: 5
+		await prisma.product.update({
+			where: { id: 5 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Гункан Сьомга - id: 7
+		await prisma.product.update({
+			where: { id: 7 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Піца Пепероні - id: 9
+		await prisma.product.update({
+			where: { id: 9 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Піца М'ясна - id: 10
+		await prisma.product.update({
+			where: { id: 10 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Піца Маргарита - id: 11
+		await prisma.product.update({
+			where: { id: 11 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Coca-Cola - id: 13
+		await prisma.product.update({
+			where: { id: 13 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Нігірі вугор - id: 6
+		await prisma.product.update({
+			where: { id: 6 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
+				},
+			},
+		});
+
+		// Гункан вугор - id: 8
+		await prisma.product.update({
+			where: { id: 8 },
+			data: {
+				category: {
+					connect: [{ id: popularCategory.id }],
 				},
 			},
 		});

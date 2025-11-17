@@ -73,6 +73,13 @@ export const categories = [
 			'https://cdn-icons-png.flaticon.com/512/857/857681.png',
 	},
 	{
+		titleUK: 'Популярне',
+		titleEN: 'Popular',
+		slug: 'popular',
+		imageUrl: null,
+		active: false,
+	},
+	{
 		titleUK: 'Суші',
 		titleEN: 'Sushi',
 		slug: 'sushi',

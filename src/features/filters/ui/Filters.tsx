@@ -15,7 +15,7 @@ interface Props {
 export const Filters: React.FC<Props> = ({ title, filters, filterId, setFilterId }) => {
 	return (
 		<section>
-			<Title size='xl' text={title} />
+			<Title size='xl' text={title} className='mb-5' />
 
 			<ul className='flex gap-2 flex-wrap'>
 				{
