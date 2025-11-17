@@ -3,7 +3,6 @@
 import React, {
 	Dispatch,
 	SetStateAction,
-	useEffect,
 	useRef,
 	useState,
 } from 'react';
@@ -13,11 +12,11 @@ import { enableBodyScroll } from 'body-scroll-lock';
 
 import { cn } from '@shared/lib';
 import { OptionWithIngredients } from '@shared/model/types';
-import { useAddCartItemMutation, useGetCartQuery } from '@shared/redux';
 import { Button, CloseIcon, Container, Title } from '@shared/ui';
 
 import { Counter } from './Counter';
 import { Option } from './Option';
+import { AddCartItemMutation } from '../model/types';
 
 interface Props {
 	productId: number;
@@ -30,6 +29,8 @@ interface Props {
 	count: number;
 	productPrice: number;
 	allOptionsIngredients: Ingredient[];
+	addCartItem: AddCartItemMutation;
+	isCartItemLoading: boolean;
 }
 
 export const ProductOptionsPopup: React.FC<Props> = ({
@@ -43,6 +44,8 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 	count,
 	productPrice,
 	allOptionsIngredients,
+	addCartItem,
+	isCartItemLoading,
 }) => {
 	// TODO(refactor): remove calculating logic to lib
 	const [selectedIngredients, setSelectedIngredients] = useState<number[]>([]);
@@ -79,8 +82,6 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 	);
 
 	const totalProductPrice = productPrice + selectedIngredientsPrice;
-
-	const [addCartItem, { isLoading: isCartItemLoading }] = useAddCartItemMutation();
 
 	const handleAddCartItem = async () => {
 		await addCartItem({

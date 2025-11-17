@@ -8,10 +8,12 @@ import Image from 'next/image';
 
 import { cn } from '@shared/lib';
 import { OptionWithIngredients } from '@shared/model/types';
-import { Title } from '@shared/ui';
+import { Button, Title } from '@shared/ui';
 
 import { Counter } from './Counter';
 import { ProductOptionsPopup } from './ProductOptionsPopup';
+import { useAddCartItemMutation } from '@shared/redux';
+import { ShoppingBasket } from 'lucide-react';
 
 interface Props {
 	className?: string;
@@ -38,6 +40,18 @@ export const ProductCard: React.FC<Props> = ({
 	ingredients,
 	options,
 }) => {
+	const [addCartItem, { isLoading: isCartItemLoading }] = useAddCartItemMutation();
+
+	const handleAddCartItem = async () => {
+		await addCartItem({
+			productId: id,
+			quantity: count,
+			ingredients: [],
+		});
+
+		setIsProductPopupOpen(false);
+	};
+
 	const [count, setCount] = useState(1);
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
@@ -69,6 +83,8 @@ export const ProductCard: React.FC<Props> = ({
 				setCount={setCount}
 				productPrice={price}
 				allOptionsIngredients={allOptionsIngredients}
+				addCartItem={addCartItem}
+				isCartItemLoading={isCartItemLoading}
 			/>
 
 			<div className='h-40'>
@@ -98,31 +114,14 @@ export const ProductCard: React.FC<Props> = ({
 				</div>
 			</div>
 
-			<button
-				onClick={() => handleProductPopupOpen()}
-				className='flex justify-center items-center p-2 bg-custom-blue w-full cursor-pointer'
+			<Button
+				onClick={() => allOptionsIngredients.length > 0 ? handleProductPopupOpen() : handleAddCartItem()}
+				loading={isCartItemLoading}
+				className='flex justify-center items-center bg-custom-blue w-full rounded-none'
+				size='icon'
 			>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width='24'
-					height='24'
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='#fff'
-					strokeWidth='1'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					className='lucide lucide-shopping-basket-icon lucide-shopping-basket'
-				>
-					<path d='m15 11-1 9' />
-					<path d='m19 11-4-7' />
-					<path d='M2 11h20' />
-					<path d='m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4' />
-					<path d='M4.5 15.5h15' />
-					<path d='m5 11 4-7' />
-					<path d='m9 11 1 9' />
-				</svg>
-			</button>
+				<ShoppingBasket strokeWidth={1.5} />
+			</Button>
 		</div>
 	);
 };
