@@ -104,26 +104,38 @@ export const CartDrawer: React.FC = () => {
 							<p>Loading...</p>
 						) : (
 							cartItems && cartItems.length > 0 ? (
-								cartItems?.map((item) => (
-									<CartDrawerItem
-										key={item.cartItemId}
-										cartItemId={item.cartItemId}
-										categoryName={item.categoryName}
-										productName={item.titleUK}
-										price={item.price}
-										weight={item.weight}
-										imageUrl={item.imageUrl}
-										ingredients={item.ingredients}
-										quantity={item.quantity}
-									/>
-								))
+								<AnimatePresence>
+									{cartItems?.map((item) => (
+										<CartDrawerItem
+											key={item.cartItemId}
+											cartItemId={item.cartItemId}
+											categoryName={item.categoryName}
+											productName={item.titleUK}
+											price={item.price}
+											weight={item.weight}
+											imageUrl={item.imageUrl}
+											ingredients={item.ingredients}
+											quantity={item.quantity}
+										/>
+									))}
+								</AnimatePresence>
 							) : (
-								<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-5/6 flex flex-col items-center gap-5'>
+								<motion.div
+									className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-5/6 flex flex-col items-center gap-5'
+									initial={{ opacity: 0, scale: 0 }}
+									animate={{ opacity: 1, scale: 1 }}
+									transition={{
+										type: "spring",
+										stiffness: 260,
+										damping: 20,
+										duration: 0.5
+									}}
+								>
 									<Title className='text-center' size='md' text='Упс, кошик порожній' />
 									<Button>
 										<Link href='/' onClick={() => handleCartDrawerClose()}>Дивитись меню</Link>
 									</Button>
-								</div>
+								</motion.div>
 							)
 						)}
 					</div>

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Ingredient } from '@prisma/client';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import { Counter } from '@entities/product-card/ui/Counter';
 import {
@@ -75,7 +76,14 @@ export const CartDrawerItem: React.FC<Props> = ({
 	};
 
 	return (
-		<div className='p-2 border-[2px] border-gray-200 rounded-md relative'>
+		<motion.div
+			layout
+			initial={{ opacity: 0, x: -20 }}
+			animate={{ opacity: 1, x: 0 }}
+			exit={{ opacity: 0, x: -300 }}
+			transition={{ duration: 0.3 }}
+			className='p-2 border-[2px] border-gray-200 rounded-md relative'
+		>
 			<div className='flex items-center gap-3 '>
 				<button
 					onClick={handleDeleteCartItem}
@@ -123,6 +131,6 @@ export const CartDrawerItem: React.FC<Props> = ({
 					</div>
 				))}
 			</div>
-		</div>
+		</motion.div>
 	);
 };

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Ingredient } from '@prisma/client';
 import { disableBodyScroll } from 'body-scroll-lock';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import { cn } from '@shared/lib';
 import { OptionWithIngredients } from '@shared/model/types';
@@ -54,9 +55,14 @@ export const ProductCard: React.FC<Props> = ({
 
 	const [count, setCount] = useState(1);
 	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
+	const [imageLoaded, setImageLoaded] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 
 	const allOptionsIngredients = options.flatMap((option) => option.ingredients);
+
+	useEffect(() => {
+		setImageLoaded(false);
+	}, [imageUrl]);
 
 	const handleProductPopupOpen = () => {
 		if (!ref.current) return;
@@ -87,15 +93,21 @@ export const ProductCard: React.FC<Props> = ({
 				isCartItemLoading={isCartItemLoading}
 			/>
 
-			<div className='h-40'>
+			<motion.div
+				className='h-40'
+				initial={{ opacity: 0 }}
+				animate={{ opacity: imageLoaded ? 1 : 0 }}
+				transition={{ duration: 0.4, ease: "easeOut" }}
+			>
 				<Image
 					className='h-full object-cover'
 					src={imageUrl}
 					width={500}
 					height={500}
 					alt='Picture of the author'
+					onLoad={() => setImageLoaded(true)}
 				/>
-			</div>
+			</motion.div>
 
 			<div className='p-2'>
 				<Title
