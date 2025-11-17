@@ -49,7 +49,7 @@ export const CategoryDrawer: React.FC = () => {
 			{/* Cats Drawer  */}
 			<div
 				className={cn(
-					'pb-20 bg-primary fixed z-10 top-[50px] right-0 w-full h-full overflow-y-auto transition duration-300 ease-in-out md:pb-0 md:h-fit',
+					'pb-20 bg-white fixed z-10 top-[50px] right-0 w-full h-full overflow-y-auto transition duration-300 ease-in-out md:pb-0 md:h-fit',
 					{
 						'transform -translate-y-500': !isCatsDrawerOpen,
 					},

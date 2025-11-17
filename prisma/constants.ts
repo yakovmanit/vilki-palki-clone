@@ -63,38 +63,38 @@ export const ingredients = [
 	},
 ];
 
-// Главные категории (без родителя)
+// Головні категорії
 export const categories = [
 	{
 		titleUK: 'Все',
 		titleEN: 'All',
 		slug: 'all',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
+			'https://cdn-icons-png.flaticon.com/512/857/857681.png',
 	},
 	{
 		titleUK: 'Суші',
 		titleEN: 'Sushi',
 		slug: 'sushi',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/62/bf/174403308611.jpg',
+			'https://cdn-icons-png.flaticon.com/512/3978/3978693.png',
 	},
 	{
 		titleUK: 'Піца',
 		titleEN: 'Pizza',
 		slug: 'pizza',
-		imageUrl: 'https://vilki-palki.od.ua/storage/img/15/60/17253073392.jpg',
+		imageUrl: 'https://cdn-icons-png.flaticon.com/512/99/99954.png',
 	},
 	{
 		titleUK: 'Напої',
 		titleEN: 'Drinks',
 		slug: 'drinks',
 		imageUrl:
-			'https://vilki-palki.od.ua/storage/img/b1/5f/16242801651623150280кока-кола.jpg',
+			'https://cdn-icons-png.flaticon.com/512/3132/3132691.png',
 	},
 ];
 
-// Подкатегории (с указанием slug родителя)
+// Підкатегорії
 export const subcategories = [
 	// Підкатегорії для Суші
 	{
@@ -121,7 +121,7 @@ export const subcategories = [
 		imageUrl:
 			'https://vilki-palki.od.ua/storage/img/25/c5/1730980755о.png',
 	},
-	// Підкатегорія для Роли (вложенная)
+	// Підкатегорія для Роли
 	{
 		titleUK: 'Холодні роли',
 		titleEN: 'Cold rolls',
