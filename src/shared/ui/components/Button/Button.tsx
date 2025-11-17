@@ -4,6 +4,7 @@ import * as React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { cn } from '@shared/lib';
+import { Loader } from 'lucide-react';
 
 const buttonStyles = cva(
 	'rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-white dark:ring-offset-gray-900',
@@ -34,17 +35,20 @@ export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
 		VariantProps<typeof buttonStyles> {
 	asChild?: boolean;
+	loading?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-	({ className, variant, size, asChild = false, ...props }, ref) => {
+	({ className, variant, size, asChild = false, loading, ...props }, ref) => {
 		const Comp = asChild ? Slot : 'button';
 		return (
 			<Comp
 				className={cn(buttonStyles({ variant, size, className }))}
 				ref={ref}
 				{...props}
-			/>
+			>
+				{loading ? <Loader className='animate-spin m-auto' /> : props.children}
+			</Comp>
 		);
 	},
 );

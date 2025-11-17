@@ -80,7 +80,7 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 
 	const totalProductPrice = productPrice + selectedIngredientsPrice;
 
-	const [addCartItem] = useAddCartItemMutation();
+	const [addCartItem, { isLoading: isCartItemLoading }] = useAddCartItemMutation();
 
 	const handleAddCartItem = async () => {
 		await addCartItem({
@@ -88,6 +88,8 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 			productId: productId,
 			quantity: count,
 		});
+
+		closePopup(false);
 	};
 
 	return (
@@ -140,7 +142,10 @@ export const ProductOptionsPopup: React.FC<Props> = ({
 						<Counter count={count} setCount={setCount} isPopupCounter={true} />
 					</div>
 
-					<Button onClick={handleAddCartItem} className='w-full text-lg'>
+					<Button
+						onClick={handleAddCartItem} className='w-full text-lg'
+						loading={isCartItemLoading}
+					>
 						Додати в кошик
 					</Button>
 				</Container>
