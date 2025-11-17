@@ -10,6 +10,7 @@ import { cn } from '@shared/lib';
 import { Button, Container, Title } from '@shared/ui';
 
 import { CartDrawerItem } from './CartDrawerItem';
+import { Link } from '@shared/lib/i18n';
 
 export const CartDrawer: React.FC = () => {
 	const { cartItems, isLoading, cartTotalAmount } = useCart();
@@ -33,35 +34,40 @@ export const CartDrawer: React.FC = () => {
 	};
 
 	return (
-		<div>
-			<div className='flex justify-between items-center fixed left-0 bottom-0 w-full bg-primary text-white p-3 z-30'>
-				<div
-					onClick={() =>
-						isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()
-					}
-					ref={ref}
-				>
-					<button>
-						<ChevronUp
-							className={cn(
-								'w-8 h-8 text-custom-gray transition duration-300 ease-in-out',
-								{
-									'transform rotate-180': !isCartDrawerOpen,
-								},
-							)}
-						/>
-					</button>
-				</div>
+		<div
+			ref={ref}
+		>
+			{
+				cartItems && cartItems.length > 0 && (
+					<div className='flex justify-between items-center fixed left-0 bottom-0 w-full bg-primary text-white p-3 z-30'>
+						<div
+							onClick={() =>
+								isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()
+							}
+						>
+							<button>
+								<ChevronUp
+									className={cn(
+										'w-8 h-8 text-custom-gray transition duration-300 ease-in-out',
+										{
+											'transform rotate-180': !isCartDrawerOpen,
+										},
+									)}
+								/>
+							</button>
+						</div>
 
-				<div className='flex justify-between items-center gap-3'>
-					<div className='text-right'>
-						<p className='text-xs text-custom-gray'>До сплати</p>
-						<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
+						<div className='flex justify-between items-center gap-3'>
+							<div className='text-right'>
+								<p className='text-xs text-custom-gray'>До сплати</p>
+								<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
+							</div>
+
+							<Button>Оформлення</Button>
+						</div>
 					</div>
-
-					<Button>Оформлення</Button>
-				</div>
-			</div>
+				)
+			}
 
 			{/* Cart Drawer */}
 			<div
@@ -89,19 +95,28 @@ export const CartDrawer: React.FC = () => {
 						{isLoading ? (
 							<p>Loading...</p>
 						) : (
-							cartItems?.map((item) => (
-								<CartDrawerItem
-									key={item.cartItemId}
-									cartItemId={item.cartItemId}
-									categoryName={item.categoryName}
-									productName={item.titleUK}
-									price={item.price}
-									weight={item.weight}
-									imageUrl={item.imageUrl}
-									ingredients={item.ingredients}
-									quantity={item.quantity}
-								/>
-							))
+							cartItems && cartItems.length > 0 ? (
+								cartItems?.map((item) => (
+									<CartDrawerItem
+										key={item.cartItemId}
+										cartItemId={item.cartItemId}
+										categoryName={item.categoryName}
+										productName={item.titleUK}
+										price={item.price}
+										weight={item.weight}
+										imageUrl={item.imageUrl}
+										ingredients={item.ingredients}
+										quantity={item.quantity}
+									/>
+								))
+							) : (
+								<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-5/6 flex flex-col items-center gap-5'>
+									<Title className='text-center' size='md' text='Упс, кошик порожній' />
+									<Button>
+										<Link href='/' onClick={() => handleCartDrawerClose()}>Дивитись меню</Link>
+									</Button>
+								</div>
+							)
 						)}
 					</div>
 				</Container>
