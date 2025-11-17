@@ -11,6 +11,7 @@ import { Button, Container, Title } from '@shared/ui';
 
 import { CartDrawerItem } from './CartDrawerItem';
 import { Link } from '@shared/lib/i18n';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export const CartDrawer: React.FC = () => {
 	const { cartItems, isLoading, cartTotalAmount } = useCart();
@@ -37,37 +38,44 @@ export const CartDrawer: React.FC = () => {
 		<div
 			ref={ref}
 		>
-			{
-				cartItems && cartItems.length > 0 && (
-					<div className='flex justify-between items-center fixed left-0 bottom-0 w-full bg-primary text-white p-3 z-30'>
-						<div
-							onClick={() =>
-								isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()
-							}
+			<AnimatePresence>
+				{
+					cartItems && cartItems.length > 0 && (
+						<motion.div
+							className='flex justify-between items-center fixed left-0 bottom-0 w-full bg-primary text-white p-3 z-30'
+							initial={{ y: 100, opacity: 0 }}
+							animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+							exit={{ y: 100, opacity: 0, transition: { delay: 0.5, duration: 0.3 } }}
 						>
-							<button>
-								<ChevronUp
-									className={cn(
-										'w-8 h-8 text-custom-gray transition duration-300 ease-in-out',
-										{
-											'transform rotate-180': !isCartDrawerOpen,
-										},
-									)}
-								/>
-							</button>
-						</div>
-
-						<div className='flex justify-between items-center gap-3'>
-							<div className='text-right'>
-								<p className='text-xs text-custom-gray'>До сплати</p>
-								<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
+							<div
+								onClick={() =>
+									isCartDrawerOpen ? handleCartDrawerClose() : handleCartDrawerOpen()
+								}
+							>
+								<button>
+									<ChevronUp
+										className={cn(
+											'w-8 h-8 text-custom-gray transition duration-300 ease-in-out',
+											{
+												'transform rotate-180': !isCartDrawerOpen,
+											},
+										)}
+									/>
+								</button>
 							</div>
 
-							<Button>Оформлення</Button>
-						</div>
-					</div>
-				)
-			}
+							<div className='flex justify-between items-center gap-3'>
+								<div className='text-right'>
+									<p className='text-xs text-custom-gray'>До сплати</p>
+									<p className='text-xl font-semibold'>{cartTotalAmount} UAH</p>
+								</div>
+
+								<Button>Оформлення</Button>
+							</div>
+						</motion.div>
+					)
+				}
+			</AnimatePresence>
 
 			{/* Cart Drawer */}
 			<div
