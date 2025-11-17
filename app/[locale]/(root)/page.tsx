@@ -9,12 +9,6 @@ export default async function Home() {
 			slug: homeCategorySlug,
 		},
 		include: {
-			parent: {
-				include: {
-					children: true,
-				}
-			},
-			children: true,
 			categoryFilters: true,
 		}
 	});
