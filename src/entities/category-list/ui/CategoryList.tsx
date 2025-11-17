@@ -22,7 +22,9 @@ export const CategoryList: React.FC<Props> = ({ className }) => {
 
 	return (
 		<ul className={cn('grid grid-cols-3 gap-2', className)}>
-			{parentCategories?.map((category) => (
+			{parentCategories
+				?.filter(category => category.active)
+				.map((category) => (
 				<li key={category.id}>
 					<Link href={`/category/${category.slug}`}>
 						<div className='flex flex-col items-center'>
