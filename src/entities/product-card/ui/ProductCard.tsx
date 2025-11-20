@@ -15,6 +15,7 @@ import { Counter } from './Counter';
 import { ProductOptionsPopup } from './ProductOptionsPopup';
 import { useAddCartItemMutation } from '@shared/redux';
 import { ShoppingBasket } from 'lucide-react';
+import { Link } from '@shared/lib/i18n';
 
 interface Props {
 	className?: string;
@@ -99,22 +100,26 @@ export const ProductCard: React.FC<Props> = ({
 				animate={{ opacity: imageLoaded ? 1 : 0 }}
 				transition={{ duration: 0.4, ease: "easeOut" }}
 			>
-				<Image
-					className='h-full object-cover'
-					src={imageUrl}
-					width={500}
-					height={500}
-					alt='Picture of the author'
-					onLoad={() => setImageLoaded(true)}
-				/>
+				<Link href={`/product/${slug}`}>
+					<Image
+						className='h-full object-cover'
+						src={imageUrl}
+						width={500}
+						height={500}
+						alt='Picture of the author'
+						onLoad={() => setImageLoaded(true)}
+					/>
+				</Link>
 			</motion.div>
 
 			<div className='p-2'>
-				<Title
-					className='font-semibold text-ellipsis whitespace-nowrap overflow-hidden'
-					size='xs'
-					text={titleUK}
-				/>
+				<Link href={`/product/${slug}`}>
+					<Title
+						className='font-semibold text-ellipsis whitespace-nowrap overflow-hidden'
+						size='xs'
+						text={titleUK}
+					/>
+				</Link>
 
 				<p className='text-custom-gray text-sm mb-10'>Вага: {weight}г</p>
 
