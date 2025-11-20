@@ -1,3 +1,4 @@
+import { Minus, Plus } from 'lucide-react';
 import React from 'react';
 
 import { cn } from '@shared/lib';
@@ -7,6 +8,7 @@ interface Props {
 	isPopupCounter?: boolean;
 	handleUpdateCartItem?: (type: 'plus' | 'minus') => void;
 	setCount?: React.Dispatch<React.SetStateAction<number>>;
+	isPDPCounter?: boolean;
 	className?: string;
 }
 
@@ -15,10 +17,9 @@ export const Counter: React.FC<Props> = ({
 	count,
 	isPopupCounter = false,
 	handleUpdateCartItem,
+	isPDPCounter,
 	setCount,
 }) => {
-	const iconSize = isPopupCounter ? 24 : 16;
-
 	const handleDecrement = () => {
 		if (setCount) {
 			setCount((prev) => Math.max(1, prev - 1));
@@ -43,44 +44,20 @@ export const Counter: React.FC<Props> = ({
 			)}
 		>
 			<button onClick={handleDecrement} className='p-1'>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width={iconSize}
-					height={iconSize}
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='#99a1af'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					className='lucide lucide-minus-icon lucide-minus'
-				>
-					<path d='M5 12h14' />
-				</svg>
+				<Minus className={cn('', { 'text-gray-400': isPDPCounter })} strokeWidth={2.2} />
 			</button>
 
 			<span
-				className={cn('text-xs font-semibold', { 'text-md': isPopupCounter })}
+				className={cn('text-xs font-semibold', {
+					'text-md': isPopupCounter,
+					'text-lg': isPDPCounter
+				})}
 			>
 				{count}
 			</span>
 
 			<button onClick={handleIncrement} className='p-1'>
-				<svg
-					xmlns='http://www.w3.org/2000/svg'
-					width={iconSize}
-					height={iconSize}
-					viewBox='0 0 24 24'
-					fill='none'
-					stroke='#99a1af'
-					strokeWidth='2'
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					className='lucide lucide-plus-icon lucide-plus'
-				>
-					<path d='M5 12h14' />
-					<path d='M12 5v14' />
-				</svg>
+				<Plus className={cn('text-gr', { 'text-gray-400': isPDPCounter })} strokeWidth={2.2} />
 			</button>
 		</div>
 	);
