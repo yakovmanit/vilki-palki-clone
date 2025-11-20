@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import { Button, Container, Title } from '@shared/ui';
 import { Counter } from '@entities/product-card/ui/Counter';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ProductWithRelations } from '@shared/model/types';
+import { useAddCartItemMutation } from '@shared/redux';
+import { ProductOptionsPopup } from '@entities/product-card/ui/ProductOptionsPopup';
 
 interface Props {
 	product: ProductWithRelations | null;
@@ -12,6 +14,8 @@ interface Props {
 
 const ProductPage = ({ product }: Props) => {
 	const [count, setCount] = useState(1);
+	const [isProductPopupOpen, setIsProductPopupOpen] = useState(false);
+	const ref = useRef<HTMLDivElement>(null);
 
 	if (!product) {
 		return (
@@ -21,13 +25,29 @@ const ProductPage = ({ product }: Props) => {
 		);
 	}
 
-	const { id, titleUK, titleEN, price, weight, ingredients } = product;
+	const { id, titleUK, titleEN, price, weight, ingredients, imageUrl, options } = product;
+
+	const [addCartItem, { isLoading: isCartItemLoading }] = useAddCartItemMutation();
+
+	const allOptionsIngredients = options.flatMap((option) => option.ingredients);
+
+	const handleAddCartItem = async () => {
+		if (allOptionsIngredients.length > 0) {
+			setIsProductPopupOpen(true);
+		} else {
+			await addCartItem({
+				productId: id,
+				quantity: count,
+				ingredients: [],
+			});
+		}
+	};
 
 	return (
-		<div>
+		<div ref={ref}>
 			{/* Main image */}
 			<div>
-				<Image alt={'Auto'} src={'https://vilki-palki.od.ua/storage/img/df/ee/1762345704нігірігребінецьфон.jpg'} width={500} height={500} />
+				<Image alt={titleUK} src={imageUrl} width={500} height={500} />
 			</div>
 
 			<Container>
@@ -41,7 +61,7 @@ const ProductPage = ({ product }: Props) => {
 				<div className='flex items-center gap-4 my-12'>
 					<Counter isPDPCounter={true} count={count} setCount={setCount} />
 
-					<Button className='text-sm h-10 py-0'>
+					<Button onClick={handleAddCartItem} loading={isCartItemLoading} className='text-sm h-10 py-0 min-w-35'>
 						Додати в кошик
 					</Button>
 				</div>
@@ -70,7 +90,7 @@ const ProductPage = ({ product }: Props) => {
 							<ul className='grid grid-cols-3 gap-4'>
 								{
 									ingredients.map(ingredient =>
-										<li className='bg-gray-50 rounded-md flex flex-col items-center p-4'>
+										<li className='bg-gray-50 rounded-md flex flex-col items-center p-4' key={ingredient.id}>
 											<Image alt={ingredient.titleUK} src={ingredient.imageUrl} width={70} height={70} />
 
 											<p className='text-custom-gray text-sm'>{ingredient.titleUK}</p>
@@ -118,6 +138,20 @@ const ProductPage = ({ product }: Props) => {
 					</Container>
 				</Container>
 			</div>
+
+			<ProductOptionsPopup
+				productId={id}
+				title={titleUK}
+				options={options}
+				isOpen={isProductPopupOpen}
+				closePopup={setIsProductPopupOpen}
+				count={count}
+				setCount={setCount}
+				productPrice={price}
+				allOptionsIngredients={allOptionsIngredients}
+				addCartItem={addCartItem}
+				isCartItemLoading={isCartItemLoading}
+			/>
 		</div>
 	);
 };
