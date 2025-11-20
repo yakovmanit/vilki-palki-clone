@@ -4,9 +4,24 @@ import Image from 'next/image';
 import { Button, Container, Title } from '@shared/ui';
 import { Counter } from '@entities/product-card/ui/Counter';
 import { useState } from 'react';
+import { ProductWithRelations } from '@shared/model/types';
 
-const ProductPage = () => {
+interface Props {
+	product: ProductWithRelations | null;
+}
+
+const ProductPage = ({ product }: Props) => {
 	const [count, setCount] = useState(1);
+
+	if (!product) {
+		return (
+			<Container>
+				<Title text="Продукт не знайдено" size="md" className="mt-8" />
+			</Container>
+		);
+	}
+
+	const { id, titleUK, titleEN, price, weight, ingredients } = product;
 
 	return (
 		<div>
@@ -16,10 +31,10 @@ const ProductPage = () => {
 			</div>
 
 			<Container>
-				<Title text={'Гункан гребінець'} size={'md'} className='mt-8 mb-4' />
+				<Title text={titleUK} size={'md'} className='mt-8 mb-4' />
 
 				<div className='text-xl font-bold'>
-					Ціна 75 UAH
+					Ціна {price} UAH
 				</div>
 
 				{/* Counter & ATC btn */}
@@ -32,28 +47,40 @@ const ProductPage = () => {
 				</div>
 
 				{/* Description */}
-				<div className='py-12 border-t border-b border-gray-200 flex flex-col gap-4'>
-					<p className='text-gray-500'>
-						Вага: 45г, Калорійність: 120 ккал, Білки: 8г, Жири: 5г, Вуглеводи: 10г
-					</p>
+				<div className='my-12 py-12 border-t border-b border-gray-200 flex flex-col gap-4'>
+					{
+						weight && (
+							<p className='text-gray-500'>
+								Вага: {weight}г
+							</p>
+						)
+					}
 
 					<p className='text-gray-500'>
-						Опис: Гункан з ніжним гребінцем, свіжим авокадо та ікрою тобіко. Ідеальний вибір для любителів морепродуктів.
+						Гункан з ніжним гребінцем, свіжим авокадо та ікрою тобіко. Ідеальний вибір для любителів морепродуктів.
 					</p>
 				</div>
 
 				{/* Ingredients */}
-				<div className='my-12'>
-					<Title size='xs' className='text-custom-gray mb-8' text={'Склад:'} />
+				{
+					ingredients && ingredients.length > 0 && (
+						<div className='my-12'>
+							<Title size='xs' className='text-custom-gray mb-8' text={'Склад:'} />
 
-					<ul className='grid grid-cols-3 gap-4'>
-						<li className='bg-gray-50 rounded-md flex flex-col items-center p-4'>
-							<Image alt={'auto'} src={'https://vilki-palki.od.ua/storage/img-cache/16629808017-removebg-preview.png.webp'} width={70} height={70} />
+							<ul className='grid grid-cols-3 gap-4'>
+								{
+									ingredients.map(ingredient =>
+										<li className='bg-gray-50 rounded-md flex flex-col items-center p-4'>
+											<Image alt={ingredient.titleUK} src={ingredient.imageUrl} width={70} height={70} />
 
-							<p className='text-custom-gray text-sm'>Гребінець</p>
-						</li>
-					</ul>
-				</div>
+											<p className='text-custom-gray text-sm'>{ingredient.titleUK}</p>
+										</li>
+									)
+								}
+							</ul>
+						</div>
+					)
+				}
 			</Container>
 
 			{/* Form */}
