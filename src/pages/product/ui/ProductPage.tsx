@@ -6,7 +6,7 @@ import { Counter } from '@entities/product-card/ui/Counter';
 import React, { useRef, useState } from 'react';
 import { ProductWithRelations } from '@shared/model/types';
 import { useAddCartItemMutation } from '@shared/redux';
-import { ProductOptionsPopup } from '@entities/product-card/ui/ProductOptionsPopup';
+import { ProductOptionsPopup } from '@entities/product-card';
 
 interface Props {
 	product: ProductWithRelations | null;
